@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin edit Banner</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banneredit_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div class="page-content">
+    <div class="container">
+
+        <h2>Banner bearbeiten</h2>
+
+        <form th:action="@{/banner_edit}" method="post" th:object="${banner}" enctype="multipart/form-data">
+
+            <!-- ID -->
+            <label th:text="Id:">Id:</label>
+            <input type="text" th:field="*{id}" readonly>
+
+            <!-- Aktuelles Bild -->
+            <div style="margin-bottom: 20px;">
+                <label>Aktuelles Bild:</label><br>
+                <img th:src="@{'/banner/image/' + ${banner.id}}"
+                     alt="Aktuelles Bild"
+                     style="max-width: 200px; border-radius: 8px; border: 1px solid #ccc;">
+            </div>
+
+            <!-- Neues Bild -->
+            <label>Neues Bild:</label>
+            <input type="file" name="file">
+
+            <!-- Filename -->
+            <label>Filename:</label>
+            <input type="text" th:field="*{filename}" required>
+
+            <!-- Bannertext -->
+            <label>Bannertext:</label>
+            <input type="text" th:field="*{bannerText}" required>
+
+            <!-- Aktiv -->
+            <label>Active:</label>
+            <select th:field="*{active}">
+                <option value="true">active</option>
+                <option value="false">inactive</option>
+            </select>
+
+            <!-- Created_at -->
+            <label>Erstellt am:</label>
+            <input type="text" th:value="${banner.created_at}" readonly>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit">Speichern</button>
+                <a th:href="@{/banner}" class="delete" style="text-decoration:none; padding:10px 20px;"
+                   >
+                    Zurück
+                </a>
+            </div>
+        </form>
+
+        <!-- Löschen -->
+        <form th:action="@{/banner_delete}" method="post">
+            <input type="hidden" th:value="${banner.id}" name="id">
+            <div class="button-group">
+                <button type="submit">Löschen</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

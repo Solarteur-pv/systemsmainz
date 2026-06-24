@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Banner</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banner_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+<div class="page-content">
+    <div class="content">
+
+        <!-- 1️⃣ Banner ERSTELLEN -->
+        <section class="create-user">
+            <h2>Neuen Banner erstellen</h2>
+
+            <form th:action="@{/bannerupload}"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <!-- Bild -->
+                <div>
+                    <label for="file">Banner Bild auswählen:</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                </div>
+
+                <!-- Bannertext -->
+                <div>
+                    <label for="banner_text">Banner Text:</label>
+                    <input type="text" id="banner_text" name="banner_text" required>
+                </div>
+
+                <!-- Aktiv -->
+                <div>
+                    <label>Active:</label>
+                    <select name="active">
+                        <option value="true">active</option>
+                        <option value="false">inactive</option>
+                    </select>
+                </div>
+
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+
+        <!-- 2️⃣ Banner Liste -->
+        <section class="user-list">
+            <h2>Banner Liste</h2>
+
+            <!-- Suchfeld -->
+            <form method="GET" th:action="@{/banner}">
+                <input type="text"
+                       name="search"
+                       th:placeholder="Suchen"
+                       th:value="${search}">
+                <button type="submit" th:text="Suchen">Suchen</button>
+            </form>
+
+            <!-- Tabelle -->
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Bannertext</th>
+                    <th>Active</th>
+                    <th>Erstellt am</th>
+                    <th>Aktion</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="b : ${banners}">
+                    <td th:text="${b.id}"></td>
+                    <td th:text="${b.filename}"></td>
+                    <td th:text="${b.bannerText}"></td>
+                    <td th:text="${b.active}"></td>
+                    <td th:text="${b.created_at}"></td>
+
+                    <td>
+                        <form method="get" th:action="@{/admin/banner_edit}">
+                            <input type="hidden" name="id" th:value="${b.id}">
+                            <button type="submit" class="btn-success">Bearbeiten</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Solarteur">Solarteur</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="page-content">
+    <section class="gr-slider">
+        <div th:each="b, iter : ${banners}"
+             th:class="'gr-slide' + (iter.index == 0 ? ' active' : '')">
+            <img th:src="@{'/banner/image/' + ${b.id}}"
+                 alt="Banner"
+                 class="gr-slide-image">
+            <div class="gr-caption">
+                <h2 th:text="${b.bannerText}">Banner Text</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="content"  th:if="false">
+          <div class="home-cards">
+              <div class="home-card" th:each="c : ${cards}">
+
+                  <!-- Bild aus BLOB -->
+
+                <img th:src="'data:' + ${c.contentType} + ';base64,' + ${c.dataAsBase64}"
+                     class="home-card-img">
+
+                <!-- Titel -->
+                <h3 th:text="${c.title}"></h3>
+
+                <!-- Text -->
+                <ul>
+                    <p th:text="${c.homeCardText}"></p>
+                </ul>
+
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".gr-slide");
+        const nextBtn = document.querySelector(".gr-next");
+        const prevBtn = document.querySelector(".gr-prev");
+
+        if (!slides || slides.length === 0) {
+            console.warn("Keine Banner gefunden – Slider wird nicht gestartet.");
+            return;
+        }
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove("active"));
+            slides[index].classList.add("active");
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        showSlide(0);
+        if (nextBtn) nextBtn.addEventListener("click", nextSlide);
+        if (prevBtn) prevBtn.addEventListener("click", prevSlide);
+        setInterval(nextSlide, 6000);
+    });
+</script>
+</body>
+</html>

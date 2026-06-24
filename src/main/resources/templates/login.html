@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Login">Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header:: header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 999;"></div>
+
+<!-- Hauptinhalt -->
+
+<section class="login-section">
+    <div class="login-container">
+
+        <h1 th:text="Login">Login</h1>
+
+        <form th:action="@{/login}" method="post">
+
+            <input type="text" name="username" th:placeholder="Email" required>
+            <input type="password" name="password" th:placeholder="Passwort" required>
+
+            <button type="submit" class="login-btn" th:text="Anmelden">Anmelden</button>
+        </form>
+
+
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

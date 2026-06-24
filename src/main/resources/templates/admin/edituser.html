@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.index}">Green Raffle</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banneredit_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+
+<!-- Hauptinhalt -->
+<div class="page-content">
+    <div class="container">
+        <div th:if="${message}" class="alert" th:text="${message}"></div>
+
+        <div class="container">
+
+            <h2 th:text="User bearbeiten">User bearbeiten</h2>
+
+            <form th:action="@{/edituser}" th:object="${user}" method="post">
+
+                <input type="hidden" th:field="*{id}" th:value="${user.id}">
+                <input type="hidden" th:field="*{password}" th:value="${user.password}">
+
+                <label th:text="Email:">Email:</label>
+                <input type="email" th:field="*{email}" required>
+
+                <label th:text="Rolle:">Rolle:</label>
+                <select th:field="*{role}">
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+
+                <div class="button-group">
+                    <button type="submit" class="submit" th:text="Speichern">Speichern</button>
+                    <a th:href="@{/users}" class="delete" style="text-decoration:none; text-align:center; padding:10px 20px;"
+                       th:text="Zurück">
+                        Zurück
+                    </a>
+                </div>
+            </form>
+
+            <hr>
+
+            <h3 th:text="#{user.edit.wallet.title}">Wallet</h3>
+            <a th:href="@{'/editwallet/' + ${user.id}}" class="submit" style="display:inline-block; margin-top:10px;"
+               th:text="Wallet bearbeiten">
+                Wallet bearbeiten
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

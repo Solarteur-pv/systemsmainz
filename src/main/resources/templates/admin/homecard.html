@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.index}">Green Raffle</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homecard_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div class="page-content">
+    <div class="content">
+
+        <!-- 1️⃣ HomeCard ERSTELLEN -->
+        <section class="create-user">
+            <h2 th:text="Neue HomeCard erstellen">Neue HomeCard erstellen</h2>
+
+            <form th:action="@{/homecardupload}"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <!-- Bild -->
+                <div>
+                    <label for="file" th:text="HomeCard Bild auswählen:">HomeCard Bild auswählen:</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                </div>
+
+                <!-- HomeCard Titel -->
+                <div>
+                    <label for="title" th:text="HomeCard Title:">HomeCard Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <!-- HomeCard Text -->
+                <div>
+                    <label for="homeCardText" th:text="HomeCard Text:">HomeCard Text:</label>
+                    <textarea name="homeCardText" id="homeCardText" rows="6" class="homecard-textarea"></textarea>
+                </div>
+
+                <!-- Aktiv -->
+                <div>
+                    <label th:text="Active:">Active:</label>
+                    <select name="active">
+                        <option value="true" th:text="active">active</option>
+                        <option value="false" th:text="inactive">inactive</option>
+                    </select>
+                </div>
+
+                <button type="submit" th:text="Upload">Upload</button>
+            </form>
+        </section>
+
+        <!-- 2️⃣ HomeCard Liste -->
+        <section class="user-list">
+            <h2 th:text="HomeCards Liste">HomeCards</h2>
+
+            <!-- Suchfeld -->
+            <form method="GET" th:action="@{/homecards}">
+                <input type="text"
+                       name="search"
+                       th:placeholder="Suchen"
+                       th:value="${search}">
+                <button type="submit" th:text="Suchen">Suchen</button>
+            </form>
+
+            <!-- Tabelle -->
+            <table>
+                <thead>
+                <tr>
+                    <th th:text="ID">ID</th>
+                    <th th:text="Filename">Filename</th>
+                    <th th:text="Title">Title</th>
+                    <th th:text="HomeCardText">HomeCardText</th>
+                    <th th:text="Active">Active</th>
+                    <th th:text="Erstellt am">Erstellt am</th>
+                    <th th:text="Aktion">Aktion</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="b : ${homeCards}">
+                    <td th:text="${b.id}"></td>
+                    <td th:text="${b.filename}"></td>
+                    <td th:text="${b.title}"></td>
+                    <td th:text="${b.homeCardText}"></td>
+                    <td th:text="${b.active}"></td>
+                    <td th:text="${b.created_at}"></td>
+
+                    <td>
+                        <form method="get" th:action="@{/homecard_edit}">
+                            <input type="hidden" name="id" th:value="${b.id}">
+                            <button type="submit" class="btn-success" th:text="Bearbeiten">Bearbeiten</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+
+</div>
+
+</body>
+</html>

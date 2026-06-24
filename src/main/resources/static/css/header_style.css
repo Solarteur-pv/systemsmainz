@@ -1,0 +1,176 @@
+/* ============================
+   GLOBAL
+   ============================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Inter", "Roboto", sans-serif;
+    color: #222;
+    line-height: 1.55;
+}
+
+/* ============================
+   HEADER
+   ============================ */
+.page-content {
+    margin-top: 120px;
+}
+
+.gr-header {
+    background: white;
+    border-bottom: 1px solid #d5e4db;
+    padding: 0.9rem 1.4rem;
+}
+
+.gr-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.gr-logo img.logo {
+    height: 130px;
+    width: auto;
+}
+
+/* Userbox */
+.gr-userbox {
+    font-size: 1.05rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.gr-balance strong {
+    color: #0a7a4b;
+}
+
+/* ============================
+   RIGHT SIDE (Lang + Dark + Burger)
+   ============================ */
+.gr-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ============================
+   BURGER MENU
+   ============================ */
+.gr-burger {
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.gr-menu {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 70px;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0.6rem 0;
+    width: 200px;
+    z-index: 2000;
+}
+
+.gr-menu li {
+    position: relative;
+}
+
+.gr-menu li a {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: #222;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+.gr-menu li a:hover {
+    background: #e3eee7;
+}
+
+.gr-open {
+    display: block !important;
+}
+
+/* ============================
+   DROPDOWN (Unternehmen)
+   ============================ */
+.gr-menu .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 180px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 2100;
+}
+
+.gr-menu .dropdown-content li a {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+}
+
+.gr-menu li:hover > .dropdown-content {
+    display: block;
+}
+
+/* ============================
+   MOBILE (Android)
+   ============================ */
+@media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    .gr-nav {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .gr-logo img.logo {
+        height: 75px;
+    }
+
+    .gr-right {
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+        gap: 0.8rem;
+    }
+
+    .gr-menu {
+        width: 180px;
+        top: 65px;
+    }
+
+    /* Dropdown mobil untereinander */
+    .gr-menu .dropdown-content {
+        position: static;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        display: none;
+    }
+
+    .gr-menu li.open > .dropdown-content {
+        display: block;
+    }
+}

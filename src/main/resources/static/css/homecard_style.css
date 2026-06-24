@@ -1,0 +1,256 @@
+/* =========================================
+   BASE COLORS (LIGHT MODE)
+========================================= */
+.page-content {
+    margin-top: 110px; /* vorher 100px */
+}
+
+:root {
+    --bg: #f5f5f5;
+    --text: #222;
+    --card-bg: #ffffff;
+    --card-shadow: 0 3px 10px rgba(0,0,0,0.10); /* stärker */
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --button-bg: #36A2EB;
+    --button-text: #fff;
+}
+
+/* =========================================
+   DARK MODE (body.dark)
+========================================= */
+body.dark {
+    --bg: #121212;
+    --text: #e5e5e5;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 3px 10px rgba(0,0,0,0.45);
+    --input-bg: #1a1a1a;
+    --input-border: #444;
+    --button-bg: #4BC0C0;
+    --button-text: #000;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+    font-size: 1.05rem; /* leicht größer */
+}
+
+/* =========================================
+   CONTENT WRAPPER
+========================================= */
+.content {
+    max-width: 1200px; /* vorher 1100px */
+    margin: 0 auto;
+    padding: 26px; /* vorher 20px */
+}
+
+/* =========================================
+   LANGUAGE SELECT (oben)
+========================================= */
+.content > div:first-child {
+    background: var(--card-bg);
+    padding: 18px; /* vorher 15px */
+    border-radius: 14px; /* vorher 12px */
+    box-shadow: var(--card-shadow);
+    max-width: 340px; /* vorher 300px */
+    margin: 0 auto 30px auto; /* vorher 25px */
+}
+
+.content > div:first-child label {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.content > div:first-child select {
+    width: 100%;
+    padding: 12px; /* vorher 10px */
+    border-radius: 10px; /* vorher 8px */
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+/* =========================================
+   CREATE HOMECARD BOX
+========================================= */
+.create-user {
+    background: var(--card-bg);
+    padding: 26px; /* vorher 20px */
+    border-radius: 14px; /* vorher 12px */
+    box-shadow: var(--card-shadow);
+    margin-bottom: 36px; /* vorher 30px */
+    max-width: 560px; /* vorher 500px */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-user h2 {
+    text-align: center;
+    margin-bottom: 26px; /* vorher 20px */
+    font-size: 1.5rem;
+}
+
+/* Form fields */
+.create-user form div {
+    margin-bottom: 18px; /* vorher 15px */
+}
+
+.create-user label {
+    display: block;
+    margin-bottom: 7px; /* vorher 5px */
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.create-user input,
+.create-user select {
+    width: 100%;
+    padding: 12px; /* vorher 10px */
+    border-radius: 10px; /* vorher 8px */
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+/* Submit button */
+.create-user button {
+    width: 100%;
+    padding: 14px; /* vorher 12px */
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 10px; /* vorher 8px */
+    font-size: 1.1rem; /* vorher 1rem */
+    cursor: pointer;
+    margin-top: 12px; /* vorher 10px */
+}
+
+.create-user button:hover {
+    opacity: 0.9;
+}
+
+/* =========================================
+   HOMECARD LIST BOX
+========================================= */
+.user-list {
+    background: var(--card-bg);
+    padding: 26px; /* vorher 20px */
+    border-radius: 14px; /* vorher 12px */
+    box-shadow: var(--card-shadow);
+}
+
+.user-list h2 {
+    margin-bottom: 20px; /* vorher 15px */
+    font-size: 1.45rem;
+}
+
+/* Search bar */
+.user-list form {
+    display: flex;
+    gap: 12px; /* vorher 10px */
+    margin-bottom: 24px; /* vorher 20px */
+}
+
+.user-list input[type="text"] {
+    flex: 1;
+    padding: 12px; /* vorher 10px */
+    border-radius: 10px; /* vorher 8px */
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+.user-list button {
+    padding: 12px 20px; /* vorher 10px 16px */
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 10px; /* vorher 8px */
+    cursor: pointer;
+    font-size: 1.05rem;
+}
+
+.homecard-textarea {
+    width: 100%;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    border-radius: 10px; /* vorher 8px */
+    padding: 12px; /* vorher 10px */
+    font-size: 1.05rem; /* vorher 15px */
+    resize: vertical;
+}
+
+.homecard-textarea:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+/* =========================================
+   TABLE STYLING
+========================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 26px; /* vorher 20px */
+    font-size: 1.05rem;
+}
+
+thead {
+    background: rgba(0,0,0,0.06);
+}
+
+body.dark thead {
+    background: rgba(255,255,255,0.07);
+}
+
+th, td {
+    padding: 14px; /* vorher 12px */
+    border-bottom: 1px solid var(--input-border);
+}
+
+tr:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+body.dark tr:hover {
+    background: rgba(255,255,255,0.07);
+}
+
+/* Action button inside table */
+.btn-success {
+    padding: 8px 14px; /* vorher 6px 12px */
+    background: #4BC0C0;
+    color: #000;
+    border: none;
+    border-radius: 8px; /* vorher 6px */
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-success:hover {
+    opacity: 0.85;
+}
+
+/* =========================================
+   MOBILE OPTIMIERUNG
+========================================= */
+@media (max-width: 600px) {
+
+    .user-list form {
+        flex-direction: column;
+    }
+
+    table {
+        font-size: 1rem; /* vorher 0.9rem */
+    }
+
+    th, td {
+        padding: 10px; /* vorher 8px */
+    }
+}

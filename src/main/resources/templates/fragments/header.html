@@ -1,0 +1,62 @@
+<div th:fragment="header">
+
+    <!-- Header und Navigation -->
+    <header class="gr-header">
+        <nav class="gr-nav">
+
+            <!-- Logo -->
+            <div class="gr-logo">
+                <a th:href="@{/home}">
+                    <img src="/images/logo/logo.png" alt="logo" class="logo" />
+                </a>
+            </div>
+
+            <!-- Rechts: Sprachwahl + Darkmode + Burger -->
+            <div class="gr-right">
+
+                <!-- Hamburger -->
+                <div class="gr-burger" onclick="grToggleMenu()">☰</div>
+
+                <!-- Menü -->
+                <ul class="gr-menu" id="grMenu">
+                    <li><a th:href="@{/}" th:text="Home">Home</a></li>
+                    <li><a th:href="@{/products}" th:text="Shop">Shop</a></li>
+
+                    <!-- Dropdown-Menü -->
+                    <li class="dropdown">
+                        <a th:href="@{/about}">Das Unternehmen</a>
+                        <ul class="dropdown-content">
+                            <li><a th:href="@{/downloads}" th:text="Downloads">Downloads</a></li>
+                            <li><a th:href="@{/career}" >Beruf & Karriere</a></li>
+                            <li><a th:href="@{/partner}" th:text="Partner">Partner</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a th:href="@{/referenzen}" th:text="Referenzen">Referenzen</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <script>
+        // Hamburger-Menü
+        function grToggleMenu() {
+            document.getElementById("grMenu").classList.toggle("gr-open");
+        }
+
+        // Darkmode beim Laden wiederherstellen
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark");
+
+            const toggle = document.getElementById("darkSwitch");
+            if (toggle) {
+                toggle.checked = true;
+            }
+        }
+
+        // Darkmode toggeln
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle("dark");
+            localStorage.setItem("darkMode", isDark);
+        }
+    </script>
+</div>
