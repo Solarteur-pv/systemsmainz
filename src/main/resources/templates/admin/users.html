@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{title.index}">Green Raffle</title>
+    <title>Admin Users</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/users_style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
 
         <!-- 1️⃣ USER ERSTELLEN -->
         <section class="create-user">
-            <h2 th:text="Neuen Benutzer erstellen">Neuen Benutzer erstellen</h2>
+            <h2>Neuen Benutzer erstellen</h2>
 
             <form th:action="@{/registration_a}" th:object="${user}" method="post">
 
@@ -41,34 +41,41 @@
                     </select>
                 </div>
 
-                <button type="submit" th:text="#{admin.user.create.button}">Registrieren</button>
+                <button type="submit">Registrieren</button>
 
                 <p th:if="${message}" th:text="${message}"></p>
             </form>
         </section>
 
+        <div th:if="${message}" class="alert alert-success">
+            <span th:text="${message}"></span>
+        </div>
+        <div th:if="${message}" class="alert alert-success">
+            <span th:text="${message}"></span>
+        </div>
+
 
         <!-- 2️⃣ NORMALE USER -->
         <section class="user-list">
-            <h2 th:text="User Liste">User Liste</h2>
+            <h2>User Liste</h2>
 
             <!-- Suchfeld -->
             <form method="GET" th:action="@{/users}">
                 <input type="text" name="search"
                        th:placeholder="Suchen"
                        th:value="${search}">
-                <button type="submit" th:text="Suchen">Suchen</button>
+                <button type="submit">Suchen</button>
             </form>
 
             <!-- Tabelle -->
             <table>
                 <thead>
                 <tr>
-                    <th th:text="#{admin.user.table.id}">ID</th>
-                    <th th:text="#{admin.user.table.username}">Benutzername</th>
-                    <th th:text="#{admin.user.table.email}">Email</th>
-                    <th th:text="#{admin.user.table.role}">Rolle</th>
-                    <th th:text="#{admin.user.table.actions}">Aktionen</th>
+                    <th>ID</th>
+                    <th>Benutzername</th>
+                    <th>Email</th>
+                    <th>Rolle</th>
+                    <th>Aktionen</th>
                 </tr>
                 </thead>
 
@@ -79,8 +86,7 @@
                     <td th:text="${u.role}"></td>
 
                     <td>
-                        <a th:href="@{'/edituser/' + ${u.id}}" th:text="#{admin.user.table.edit}">Bearbeiten</a> |
-                        <a th:href="@{'/editwallet/' + ${u.id}}" th:text="#{admin.user.table.wallet}">Wallet</a>
+                        <a th:href="@{'/edituser/' + ${u.id}}">Bearbeiten</a> |
                     </td>
                 </tr>
                 </tbody>
@@ -89,19 +95,17 @@
             <!-- Pagination -->
             <div class="pagination">
             <span th:if="${page.hasPrevious()}">
-                <a th:href="@{/users(page=${page.number - 1}, search=${search})}"
-                   th:text="#{admin.user.pagination.prev}">
+                <a th:href="@{/users(page=${page.number - 1}, search=${search})}">
                     Vorherige
                 </a>
             </span>
 
-                <span th:text="#{admin.user.pagination.page} + ' ' + (${page.number} + 1) + ' ' + #{admin.user.pagination.of} + ' ' + ${page.totalPages}">
+                <span th:text="'Seite' + ' ' + (${page.number} + 1) + ' ' + 'von' + ' ' + ${page.totalPages}">
                 Seite X von Y
-            </span>
+            </span
 
                 <span th:if="${page.hasNext()}">
-                <a th:href="@{/users(page=${page.number + 1}, search=${search})}"
-                   th:text="#{admin.user.pagination.next}">
+                <a th:href="@{/users(page=${page.number + 1}, search=${search})}">
                     Nächste
                 </a>
             </span>
@@ -109,38 +113,7 @@
         </section>
 
     </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-
-            <div class="footer-section">
-                <h3 th:text="#{footer.contact}">Kontakt</h3>
-                <p>Email: support@tombo.app</p>
-                <p>Telefon: +49 123 456789</p>
-            </div>
-
-            <div class="footer-section">
-                <h3 th:text="#{footer.follow.us}">Folge uns</h3>
-                <div class="social-links">
-                    <a href="#" class="social"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3 th:text="#{footer.legal}">Rechtliches</h3>
-                <p><a href="#" th:text="#{footer.imprint}">Impressum</a></p>
-                <p><a href="#" th:text="#{footer.privacy}">Datenschutz</a></p>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom" th:text="#{footer.copyright}">
-            © 2026 Tombo — All rights reserved.
-        </div>
-    </footer>
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

@@ -5,19 +5,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 public class UserDto {
+    private Long id;
     private String email;
     private String password;
     private String role;
 
 
-    public UserDto(String email, String password, String role) {
+    public UserDto(Long id, String email, String password, String role) {
         super();
+        this.id = id;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
     public UserDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

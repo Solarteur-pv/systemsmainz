@@ -1,10 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Produkte – Solarteur</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/products_style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
+
 <body>
 
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <form class="search-box" th:action="@{/admin/products}" method="get">
+            <input type="text" name="search" th:value="${search}" placeholder="Produkte suchen...">
+        </form>
+
+        <a class="btn-new" th:href="@{/admin/product_create}">
+            <i class="fa fa-plus"></i> Neues Produkt
+        </a>
+    </div>
+
+    <!-- Tabelle -->
+    <table>
+        <thead>
+        <tr>
+            <th>Bild</th>
+            <th>SKU</th>
+            <th>Titel</th>
+            <th>Kategorie</th>
+            <th>Preis</th>
+            <th>Lager</th>
+            <th>Aktionen</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="p : ${products.content}">
+            <td>
+                <img th:src="${p.images[0]?.url}" class="product-thumb" alt="Bild">
+            </td>
+
+            <td th:text="${p.sku}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.category != null ? p.category.name : '–'}"></td>
+
+            <td th:text="${p.price != null ? p.price.priceGross + ' €' : '–'}"></td>
+
+            <td th:text="${p.stock != null ? p.stock.stock : 0}"></td>
+
+            <td class="actions">
+                <a th:href="@{'/admin/product_edit/' + ${p.id}}">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a th:href="@{'/admin/product_delete/' + ${p.id}}" onclick="return confirm('Wirklich löschen?')">
+                    <i class="fa fa-trash" style="color: red;"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <a th:if="${products.hasPrevious()}"
+           th:href="@{/admin/products(page=${products.number - 1}, search=${search})}">
+            &laquo; Zurück
+        </a>
+
+        <span>Seite [[${products.number + 1}]] von [[${products.totalPages}]]</span>
+
+        <a th:if="${products.hasNext()}"
+           th:href="@{/admin/products(page=${products.number + 1}, search=${search})}">
+            Weiter &raquo;
+        </a>
+    </div>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -1,0 +1,4 @@
+2026-06-26 12:48:45.779922+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]

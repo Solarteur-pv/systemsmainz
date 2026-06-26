@@ -38,5 +38,7 @@ public interface UserService {
     boolean deleteUser(Long id);
 
     User findById(Long id);
+
+    void updateUser(UserDto userDto);
 }
 

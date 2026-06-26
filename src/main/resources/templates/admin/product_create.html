@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div th:if="${message}" class="alert alert-success">
+    <span th:text="${message}"></span>
+</div>
+
+<form th:action="@{/admin/products_new}" th:object="${productDto}" method="post">
+
+    <label>SKU</label>
+    <input type="text" th:field="*{sku}">
+
+    <label>EAN</label>
+    <input type="text" th:field="*{ean}">
+
+    <label>Titel</label>
+    <input type="text" th:field="*{title}">
+
+    <label>Beschreibung</label>
+    <textarea th:field="*{description}"></textarea>
+
+    <label>Marke</label>
+    <input type="text" th:field="*{brand}">
+
+    <label>Kategorie</label>
+    <select th:field="*{categoryId}">
+        <option th:each="c : ${categories}"
+                th:value="${c.id}"
+                th:text="${c.name}">
+        </option>
+    </select>
+
+    <label>Preis (Brutto)</label>
+    <input type="number" step="0.01" th:field="*{priceGross}">
+
+    <label>Mehrwertsteuer</label>
+    <input type="number" step="0.01" th:field="*{vatRate}">
+
+    <label>Lagerbestand</label>
+    <input type="number" th:field="*{stock}">
+
+    <label>Bilder (URLs)</label>
+    <input type="text" th:field="*{imageUrls[0]}">
+    <input type="text" th:field="*{imageUrls[1]}">
+    <input type="text" th:field="*{imageUrls[2]}">
+
+    <button type="submit">Produkt speichern</button>
+</form>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -12,29 +12,14 @@
             </div>
 
             <!-- Welcome + Balance -->
-            <!-- Welcome + Balance -->
             <div class="gr-userbox">
                 <!-- Welcome + Username -->
-                <span th:text="#{header.welcome}">Welcome</span>
+                <span th:text=>Welcome</span>
                 <span th:text="${userName}">U0</span>
-
-                <!-- Balance + Amount -->
-                <span class="gr-balance">
-        | <span th:text="#{header.balance(${walletBalance} + ' €')}">Balance: 0,00 €</span>
-    </span>
             </div>
 
             <!-- Rechts: Sprachwahl + Darkmode + Burger -->
             <div class="gr-right">
-
-                <!-- Sprachwahl -->
-                <div class="dropdown lang-switch">
-                    <a href="javascript:void(0)" class="dropbtn">
-                        <img th:src="@{/images/flags/{l}.svg(l=${#locale.language})}" class="flag-icon" alt="flag">
-                        <span th:text="${#locale.language.toUpperCase()}">DE</span>
-                    </a>
-
-                </div>
 
                 <!-- Hamburger -->
                 <div class="gr-burger" onclick="grToggleMenu()">☰</div>
@@ -42,10 +27,11 @@
                 <!-- Menü -->
                 <ul class="gr-menu" id="grMenu">
                     <li><a th:href="@{/}" th:text="Home">Home</a></li>
-                    <li><a th:href="@{/admin/users}" th:text="#{header.users}">Users</a></li>
-                    <li><a th:href="@{/admin/banner}" th:text="#{header.banner}">Banner</a></li>
-                    <li><a th:href="@{/sdmin/homecard}" th:text="#{header.homecard}">HomeCard</a></li>
-                    <li><a th:href="@{/logout}" th:text="#{header.logout}">Logout</a></li>
+                    <li><a th:href="@{/admin/users}">Users</a></li>
+                    <li><a th:href="@{/admin/banner}">Banners</a></li>
+                    <li><a th:href="@{/sdmin/homecard}">HomeCards</a></li>
+                   <!-- <li><a th:href="@{/sdmin/product}">Artikel</a></li> -->
+                    <li><a th:href="@{/logout}">Logout</a></li>
                 </ul>
             </div>
         </nav>

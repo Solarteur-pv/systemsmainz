@@ -1,0 +1,47 @@
+.container {
+    width: 90%;
+    margin: 30px auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background: #f5f5f5;
+    text-align: left;
+}
+img.product-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.actions i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.pagination a {
+    margin: 0 5px;
+    text-decoration: none;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-box input {
+    padding: 6px 10px;
+    width: 250px;
+}
+.btn-new {
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}

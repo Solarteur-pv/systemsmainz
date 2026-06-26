@@ -101,6 +101,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUser(UserDto userDto) {
+
+        User user = userRepo.findById(userDto.getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Felder aktualisieren
+
+        user.setEmail(userDto.getEmail());
+
+        // Passwort nur ändern, wenn gesetzt
+        if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+
+        userRepo.save(user);
+    }
+
+    @Override
     public boolean deleteUser(Long id) {
         if (userRepo.existsById(id)) {
             userRepo.deleteById(id);
