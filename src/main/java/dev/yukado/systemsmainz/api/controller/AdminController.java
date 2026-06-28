@@ -2,17 +2,25 @@ package dev.yukado.systemsmainz.api.controller;
 
 
 import dev.yukado.systemsmainz.aop.Audit;
+import dev.yukado.systemsmainz.audit.AuditLog;
+import dev.yukado.systemsmainz.audit.AuditLogRepository;
 import dev.yukado.systemsmainz.dto.BannerDto;
+import dev.yukado.systemsmainz.dto.HomeCardDto;
 import dev.yukado.systemsmainz.dto.ProductCreateDto;
 import dev.yukado.systemsmainz.dto.UserDto;
 import dev.yukado.systemsmainz.entity.Banner;
+import dev.yukado.systemsmainz.entity.HomeCard;
 import dev.yukado.systemsmainz.entity.User;
 import dev.yukado.systemsmainz.service.banner.BannerService;
+import dev.yukado.systemsmainz.service.homecard.HomeCardService;
 import dev.yukado.systemsmainz.service.product.ProductService;
+import dev.yukado.systemsmainz.service.stats.AdminStatsService;
 import dev.yukado.systemsmainz.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -28,26 +36,57 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.util.List;
 
 @Controller("/admin")
 public class AdminController {
 
+    @Autowired
+    private AuditLogRepository auditLogRepository;
+
+    @Autowired
+    private AdminStatsService statsService;
     private final UserDetailsService userDetailsService;
     private final UserService userService;
     private final BannerService bannerService;
+
+    private final HomeCardService homecardService;
     private final ProductService productService;
 
-    public AdminController(UserDetailsService userDetailsService, UserService userService, BannerService bannerService, ProductService productService) {
+
+    public AdminController(UserDetailsService userDetailsService, UserService userService, BannerService bannerService, HomeCardService homecardService, ProductService productService) {
         this.userDetailsService = userDetailsService;
         this.userService = userService;
         this.bannerService = bannerService;
+        this.homecardService = homecardService;
         this.productService = productService;
     }
 
     @Audit(action = "VIEW_ADMIN_DASHBOARD")
     @GetMapping("/admin/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model, Principal principal) {
+
+        // --- User / Header / Wallet wie bei dir ---
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
+        User user = userService.findById(id1);
+
+        String userName = "A" + id1;
+
+        model.addAttribute("userName", userName);
+        model.addAttribute("userId", id1);
+        model.addAttribute("role", user.getRole());
+        model.addAttribute("userDetails", userDetails);
+
+        // ---------------------------------------------------------
+        //  STATISTIK-DATEN DIREKT INS MODEL (DTO)
+        // ---------------------------------------------------------
+
+        model.addAttribute("stats24h", statsService.getStats(Duration.ofHours(24)));
+        model.addAttribute("stats7d", statsService.getStats(Duration.ofDays(7)));
+        model.addAttribute("stats30d", statsService.getStats(Duration.ofDays(30)));
+
         return "admin/dashboard";
     }
 
@@ -107,8 +146,6 @@ public class AdminController {
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
-        User user = userService.findById(id1);
-        String role = user.getRole();
         String userName = "A" + id1;
 
         Banner banner = bannerService.findById(id);
@@ -152,10 +189,10 @@ public class AdminController {
         String role = user.getRole();
 
         String userName =  "A" + id1;
-        List<Banner> banners = bannerService.findAll();
+        List<HomeCard> homeCards = homecardService.findAll();
 
-        model.addAttribute("banners", banners);
-        model.addAttribute("banner", new BannerDto());
+        model.addAttribute("homeCards", homeCards);
+        model.addAttribute("HomeCard", new HomeCardDto());
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("userName", userName);
         model.addAttribute("userId", id1);
@@ -179,14 +216,14 @@ public class AdminController {
 
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        BannerDto banner = new BannerDto();
-        banner.setFilename(file.getOriginalFilename());
-        banner.setBannerText(bannerText);
-        banner.setActive(active);       // <-- WICHTIG!
-        banner.setCreated_at(createdAt);
-        banner.setContentType(file.getContentType());
+        HomeCardDto homecard = new HomeCardDto();
+        homecard.setFilename(file.getOriginalFilename());
+        homecard.setHomeCardText(bannerText);
+        homecard.setActive(active);       // <-- WICHTIG!
+        homecard.setCreated_at(createdAt);
+        homecard.setContentType(file.getContentType());
 
-        bannerService.save(banner, file);
+        homecardService.save(homecard, file);
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("userName", "A" + user.getId());
         redirectAttributes.addFlashAttribute("message", "Upload erfolgreich!");
@@ -205,19 +242,19 @@ public class AdminController {
         String role = user.getRole();
         String userName = "A" + id1;
 
-        Banner banner = bannerService.findById(id);
+        HomeCard homeCard = homecardService.findById(id);
 
         // DTO befüllen
-        BannerDto dto = new BannerDto();
-        dto.setId(banner.getId());
-        dto.setFilename(banner.getFilename());
-        dto.setBannerText(banner.getBannerText());
-        dto.setActive(banner.getActive());
-        dto.setCreated_at(banner.getCreated_at());
-        dto.setContentType(banner.getContentType());
+        HomeCardDto dto = new HomeCardDto();
+        dto.setId(homeCard.getId());
+        dto.setFilename(homeCard.getFilename());
+        dto.setHomeCardText(homeCard.getHomeCardText());
+        dto.setActive(homeCard.getActive());
+        dto.setCreated_at(homeCard.getCreated_at());
+        dto.setContentType(homeCard.getContentType());
         // data NICHT ins DTO packen
 
-        model.addAttribute("banner", dto);
+        model.addAttribute("homeCard", dto);
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("userName", userName);
         model.addAttribute("userId", id1);
@@ -227,13 +264,13 @@ public class AdminController {
 
     @Audit(action = "ADMIN_HOMECARD_EDITED")
     @PostMapping("/admin/homecard_edit")
-    public String updateHomeCard(@ModelAttribute BannerDto dto,
+    public String updateHomeCard(@ModelAttribute HomeCardDto dto,
                                @RequestParam("file") MultipartFile file,
                                RedirectAttributes redirectAttributes) throws IOException {
 
-        bannerService.update(dto, file);
+        homecardService.update(dto, file);
 
-        redirectAttributes.addFlashAttribute("message", "Banner gespeichert!");
+        redirectAttributes.addFlashAttribute("message", "HomeCard gespeichert!");
         return "redirect:/admin/homecard";
     }
 
@@ -336,7 +373,21 @@ public class AdminController {
         return "redirect:/admin/product_create?success";
     }
 
+    @GetMapping("/admin/logs")
+    public String viewLogs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            Model model) {
 
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
+        Page<AuditLog> logs = auditLogRepository.findAll(pageable);
+
+        model.addAttribute("logs", logs.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", logs.getTotalPages());
+
+        return "admin/viewlogs";
+    }
 
 }
 

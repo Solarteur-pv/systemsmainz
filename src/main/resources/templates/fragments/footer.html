@@ -1,29 +1,38 @@
-<!-- templates/fragments/footer.html -->
-<footer class="footer" th:fragment="footer">
-    <div class="footer-content">
+<footer class="gr-footer" th:fragment="footer">
 
-        <div class="footer-section">
-            <h3>Kontakt</h3>
+    <div class="gr-footer-content">
+
+        <div class="gr-footer-col">
+            <h4>solarteur.eu</h4>
+            <p>Ihr Partner für moderne Energielösungen.</p>
+            <p>Geschäftsführer/CEO: Ioannis Stamatidis</p>
+        </div>
+
+        <div class="gr-footer-col">
+            <h4>Unternehmen</h4>
+            <a th:href="@{/about}">Über uns</a>
+            <a th:href="@{/career}">Karriere</a>
+            <a th:href="@{/partner}">Partner</a>
+            <a th:href="@{/referenzen}">Referenzen</a>
+        </div>
+
+        <div class="gr-footer-col">
+            <h4>Rechtliches</h4>
+            <a th:href="@{/impressum}">Impressum</a>
+            <a th:href="@{/datenschutz}">Datenschutz</a>
+        </div>
+
+        <div class="gr-footer-col">
+            <h4>Kontakt</h4>
             <p>Email: info@solarteur.eu</p>
-        </div>
-
-        <div class="footer-section">
-            <h3>Folge uns</h3>
-            <div class="social-links">
-                <a href="#" class="social"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h3>Rechtliches</h3>
-            <p><a href="#">Impressum</a></p>
-            <p><a href="#">Datenschutz</a></p>
+            <p>Adresse: Ludwigstraße 19, 65479 Raunheim</p>
+            <p>Tel.: 06142 2306871</p>
         </div>
 
     </div>
 
-    <div class="footer-bottom">
-        © 2026 Solarteur — All rights reserved.
+    <div class="gr-footer-bottom">
+        © 2026 Solarteur — Alle Rechte vorbehalten.
     </div>
+
 </footer>

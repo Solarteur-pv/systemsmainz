@@ -45,17 +45,16 @@ public class AuthController {
         model.addAttribute("banners", banners);
         return "index";
     }
-
+    // Standard User
     @Audit(action = "VIEW_LOGIN_PAGE")
     @GetMapping("/login")
-    public String loginPage() {
+    public String login(Model model) {
+
+        model.addAttribute("headerFragment", "fragments/header :: header");
+
         return "login";
     }
 
-    @PostMapping
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
-
-    }
     @GetMapping("/about")
     public String getAbout() {
 

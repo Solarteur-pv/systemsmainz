@@ -44,9 +44,13 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/", "/about", "/index",
-                                "/favicon.ico", "/products", "/referenzen", "/login", "/logout")
+                                "/favicon.ico", "/products", "/referenzen", "/login", "/logout", "/banner/image/**", "/homecard/image/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/bannerupload/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/homecardupload/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/homecard_edit/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/banner_edit/**").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
 

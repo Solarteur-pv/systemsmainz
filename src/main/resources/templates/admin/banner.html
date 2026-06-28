@@ -19,7 +19,7 @@
         <section class="create-user">
             <h2>Neuen Banner erstellen</h2>
 
-            <form th:action="@{/bannerupload}"
+            <form th:action="@{/admin/bannerupload}"
                   method="post"
                   enctype="multipart/form-data">
 
@@ -53,7 +53,7 @@
             <h2>Banner Liste</h2>
 
             <!-- Suchfeld -->
-            <form method="GET" th:action="@{/banner}">
+            <form method="GET" th:action="@{/admin/banner}">
                 <input type="text"
                        name="search"
                        th:placeholder="Suchen"

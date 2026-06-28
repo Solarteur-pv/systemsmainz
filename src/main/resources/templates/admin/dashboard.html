@@ -1,10 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur Admin</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/stats_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
+<!-- Header und Navigation -->
+<div th:replace="fragments/header-admin :: header"></div>
+
+<!-- Hauptinhalt -->
+<!-- Statistik-Bereich -->
+<div class="page-content">
+    <section class="statistics">
+        <div class="stat-grid">
+
+            <div class="stat-item">
+                <h2>Käufe nach Country (24 Std.)</h2>
+                <canvas id="chartCountry24h"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Käufe nach City (24 Std.)</h2>
+                <canvas id="chartCity24h"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Einnahmen/Ausgaben (24 Std.)</h2>
+                <canvas id="chartFinance24h"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Käufe nach Country (7 Tage)</h2>
+                <canvas id="chartCountry7d"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Käufe nach City (7 Tage)</h2>
+                <canvas id="chartCity7d"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Einnahmen/Ausgaben (7 Tage)</h2>
+                <canvas id="chartFinance7d"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Käufe nach Country (30 Tage)</h2>
+                <canvas id="chartCountry30d"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Käufe nach City (30 Tage)</h2>
+                <canvas id="chartCity30d"></canvas>
+            </div>
+
+            <div class="stat-item">
+                <h2>Einnahmen/Ausgaben (30 Tage)</h2>
+                <canvas id="chartFinance30d"></canvas>
+            </div>
+
+        </div>
+    </section>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+<!-- JavaScript zur Initialisierung der Diagramme (Chart.js) -->
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // DTOs aus Thymeleaf übernehmen (jetzt korrekt!)
+        const stats24h  = /*[[${stats24h}]]*/ {};
+        const stats7d   = /*[[${stats7d}]]*/ {};
+        const stats30d  = /*[[${stats30d}]]*/ {};
+
+        const colors = [
+            '#FF6384','#36A2EB','#FFCE56','#4BC0C0',
+            '#9966FF','#FF9F40','#4D5360','#00A36C'
+        ];
+
+        function convertGroup(list, keyField, valueField) {
+            const labels = [];
+            const values = [];
+            list.forEach(item => {
+                labels.push(item[keyField] || "Unbekannt");
+                values.push(item[valueField]);
+            });
+            return { labels, values };
+        }
+
+        function createPieChart(id, labels, values) {
+            new Chart(document.getElementById(id), {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        function createFinanceChart(id, income, expenses) {
+            new Chart(document.getElementById(id), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Einnahmen', 'Ausgaben'],
+                    datasets: [{
+                        data: [income, Math.abs(expenses)],
+                        backgroundColor: ['#36A2EB', '#FF6384']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        // -------------------------------
+        // 24 Stunden
+        // -------------------------------
+        const c24 = convertGroup(stats24h.byCountry, "country", "sold");
+        const city24 = convertGroup(stats24h.byCity, "city", "sold");
+
+        createPieChart("chartCountry24h", c24.labels, c24.values);
+        createPieChart("chartCity24h", city24.labels, city24.values);
+        createFinanceChart("chartFinance24h", stats24h.income, stats24h.expenses);
+
+        // -------------------------------
+        // 7 Tage
+        // -------------------------------
+        const c7 = convertGroup(stats7d.byCountry, "country", "sold");
+        const city7 = convertGroup(stats7d.byCity, "city", "sold");
+
+        createPieChart("chartCountry7d", c7.labels, c7.values);
+        createPieChart("chartCity7d", city7.labels, city7.values);
+        createFinanceChart("chartFinance7d", stats7d.income, stats7d.expenses);
+
+        // -------------------------------
+        // 30 Tage
+        // -------------------------------
+        const c30 = convertGroup(stats30d.byCountry, "country", "sold");
+        const city30 = convertGroup(stats30d.byCity, "city", "sold");
+
+        createPieChart("chartCountry30d", c30.labels, c30.values);
+        createPieChart("chartCity30d", city30.labels, city30.values);
+        createFinanceChart("chartFinance30d", stats30d.income, stats30d.expenses);
+
+    });
+</script>
 </body>
 </html>

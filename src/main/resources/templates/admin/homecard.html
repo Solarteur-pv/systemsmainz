@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{title.index}">Green Raffle</title>
+    <title>Solarteur HomeCards</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/homecard_style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,33 +18,33 @@
 
         <!-- 1️⃣ HomeCard ERSTELLEN -->
         <section class="create-user">
-            <h2 th:text="Neue HomeCard erstellen">Neue HomeCard erstellen</h2>
+            <h2>Neue HomeCard erstellen</h2>
 
-            <form th:action="@{/homecardupload}"
+            <form th:action="@{/admin/homecardupload}"
                   method="post"
                   enctype="multipart/form-data">
 
                 <!-- Bild -->
                 <div>
-                    <label for="file" th:text="HomeCard Bild auswählen:">HomeCard Bild auswählen:</label>
+                    <label for="file">HomeCard Bild auswählen:</label>
                     <input type="file" id="file" name="file" accept="image/*" required>
                 </div>
 
                 <!-- HomeCard Titel -->
                 <div>
-                    <label for="title" th:text="HomeCard Title:">HomeCard Title:</label>
+                    <label for="title">HomeCard Title:</label>
                     <input type="text" id="title" name="title" required>
                 </div>
 
                 <!-- HomeCard Text -->
                 <div>
-                    <label for="homeCardText" th:text="HomeCard Text:">HomeCard Text:</label>
+                    <label for="homeCardText">HomeCard Text:</label>
                     <textarea name="homeCardText" id="homeCardText" rows="6" class="homecard-textarea"></textarea>
                 </div>
 
                 <!-- Aktiv -->
                 <div>
-                    <label th:text="Active:">Active:</label>
+                    <label>Active:</label>
                     <select name="active">
                         <option value="true" th:text="active">active</option>
                         <option value="false" th:text="inactive">inactive</option>
@@ -57,10 +57,10 @@
 
         <!-- 2️⃣ HomeCard Liste -->
         <section class="user-list">
-            <h2 th:text="HomeCards Liste">HomeCards</h2>
+            <h2>HomeCards Liste</h2>
 
             <!-- Suchfeld -->
-            <form method="GET" th:action="@{/homecards}">
+            <form method="GET" th:action="@{/admin/homecards}">
                 <input type="text"
                        name="search"
                        th:placeholder="Suchen"

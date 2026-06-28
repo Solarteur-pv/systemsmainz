@@ -14,8 +14,8 @@
             <!-- Welcome + Balance -->
             <div class="gr-userbox">
                 <!-- Welcome + Username -->
-                <span th:text=>Welcome</span>
-                <span th:text="${userName}">U0</span>
+                <span style="color: #6b7280">Welcome</span>
+                <span th:text="${userName}" style="color: #6b7280">U0</span>
             </div>
 
             <!-- Rechts: Sprachwahl + Darkmode + Burger -->
@@ -29,8 +29,9 @@
                     <li><a th:href="@{/}" th:text="Home">Home</a></li>
                     <li><a th:href="@{/admin/users}">Users</a></li>
                     <li><a th:href="@{/admin/banner}">Banners</a></li>
-                    <li><a th:href="@{/sdmin/homecard}">HomeCards</a></li>
-                   <!-- <li><a th:href="@{/sdmin/product}">Artikel</a></li> -->
+                    <li><a th:href="@{/admin/homecard}">HomeCards</a></li>
+                    <li><a th:href="@{/admin/product}">Artikel</a></li>
+                    <li><a th:href="@{/admin/logs}">Logs</a></li>
                     <li><a th:href="@{/logout}">Logout</a></li>
                 </ul>
             </div>
