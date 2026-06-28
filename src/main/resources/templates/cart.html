@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Solarteur Warenkorb</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cart_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+<!-- Header und Navigation -->
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+
+    <h1>Warenkorb</h1>
+
+    <!-- CART TABLE -->
+    <table>
+        <thead>
+        <tr>
+            <th>Produkt</th>
+            <th>Titel</th>
+            <th>Menge</th>
+            <th>Preis (Netto)</th>
+            <th>Gesamt (Brutto)</th>
+            <th>Aktion</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td data-label="Bild">
+                <img th:src="${item.product.images[0].url}" class="product-img">
+            </td>
+
+            <td data-label="Titel" th:text="${item.product.title}"></td>
+
+            <td data-label="Menge" th:text="${item.quantity}"></td>
+
+            <td data-label="Preis Netto"
+                th:text="${#numbers.formatDecimal(item.priceNet, 1, 'POINT', 2, 'POINT')} + ' €'"></td>
+
+            <td data-label="Gesamt Brutto"
+                th:text="${#numbers.formatDecimal(item.totalGross, 1, 'POINT', 2, 'POINT')} + ' €'"></td>
+
+            <td data-label="Aktion">
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="productId" th:value="${item.product.id}">
+                    <button class="btn btn-remove">Entfernen</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- TOTALS -->
+    <div class="totals-box">
+        <div class="totals-row">
+            <span>Zwischensumme (Netto):</span>
+            <span th:text="${#numbers.formatDecimal(cart.totalNet, 1, 'POINT', 2, 'POINT')} + ' €'"></span>
+        </div>
+
+        <div class="totals-row">
+            <span>Gesamt MwSt:</span>
+            <span th:text="${#numbers.formatDecimal(cart.totalVat, 1, 'POINT', 2, 'POINT')} + ' €'"></span>
+        </div>
+
+        <div class="totals-row">
+            <strong>Gesamt (Brutto):</strong>
+            <strong th:text="${#numbers.formatDecimal(cart.totalGross, 1, 'POINT', 2, 'POINT')} + ' €'"></strong>
+        </div>
+    </div>
+
+    <!-- CLEAR CART -->
+    <form th:action="@{/cart/clear}" method="post">
+        <button class="btn btn-clear">Warenkorb leeren</button>
+    </form>
+
+    <!-- CHECKOUT -->
+    <button class="btn btn-checkout">Zur Kasse</button>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

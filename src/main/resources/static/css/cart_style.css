@@ -1,0 +1,157 @@
+/* ===========================
+   GLOBAL
+============================ */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+/* ===========================
+   TABLE (Desktop)
+============================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+.product-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* ===========================
+   TOTALS
+============================ */
+.totals-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.totals-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.totals-row strong {
+    font-size: 18px;
+}
+
+/* ===========================
+   BUTTONS
+============================ */
+.btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-remove {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-remove:hover {
+    background: #b02a37;
+}
+
+.btn-clear {
+    background: #ff4444;
+    color: white;
+    margin-top: 15px;
+}
+
+.btn-clear:hover {
+    background: #cc0000;
+}
+
+.btn-checkout {
+    background: #007bff;
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    font-size: 18px;
+}
+
+.btn-checkout:hover {
+    background: #0056b3;
+}
+
+/* ===========================
+   MOBILE (Cards)
+============================ */
+@media (max-width: 700px) {
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        background: #fff;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    td {
+        border: none;
+        padding: 6px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+    }
+
+    .product-img {
+        width: 90px;
+        height: 90px;
+    }
+}
