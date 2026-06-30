@@ -1,6 +1,5 @@
 package dev.yukado.systemsmainz.repository;
 
-
 import dev.yukado.systemsmainz.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,10 +11,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findBySku(String sku);
 
-        // Suche nach Titel, SKU oder EAN
-        Page<Product> findByTitleContainingIgnoreCaseOrSkuContainingIgnoreCaseOrEanContainingIgnoreCase(
-                String title, String sku, String ean, Pageable pageable
-        );
+    // Suche nach Titel, SKU oder EAN
+    Page<Product> findByTitleContainingIgnoreCaseOrSkuContainingIgnoreCaseOrEanContainingIgnoreCase(
+            String title, String sku, String ean, Pageable pageable
+    );
 
+    Page<Product> findAll(Pageable pageable);
 }
-

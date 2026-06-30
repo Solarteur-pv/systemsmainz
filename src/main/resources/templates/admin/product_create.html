@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur Artikel hinzufügen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/products_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <!-- Header und Navigation -->
@@ -12,7 +16,7 @@
     <span th:text="${message}"></span>
 </div>
 
-<form th:action="@{/admin/products_new}" th:object="${productDto}" method="post">
+<form th:action="@{/admin/product_new}" th:object="${productDto}" method="post">
 
     <label>SKU</label>
     <input type="text" th:field="*{sku}">

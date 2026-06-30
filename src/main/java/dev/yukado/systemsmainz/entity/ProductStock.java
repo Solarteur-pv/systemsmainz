@@ -11,8 +11,8 @@ public class ProductStock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @OneToOne(optional = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer stock;

@@ -1,131 +1,122 @@
 package dev.yukado.systemsmainz.service.user;
 
-
 import dev.yukado.systemsmainz.dto.UserDto;
 import dev.yukado.systemsmainz.entity.User;
 import dev.yukado.systemsmainz.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepo;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepo, PasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Registrierung
     @Override
-    @Transactional
     public User save(UserDto userDto) {
-        // Mapping UserDto -> User
         User user = new User();
         user.setEmail(userDto.getEmail());
-        // Stellen Sie sicher, dass der PasswortEncoder eingerichtet ist.
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole(userDto.getRole());
-        return userRepo.save(user);
+        return userRepository.save(user);
     }
 
+    // Update über User-Objekt
     @Override
-    @Transactional
     public User save(User user) {
-        return userRepo.save(user);
+        return userRepository.save(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        return userRepo.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
+    // WICHTIG: Pagination + Suche funktionieren hier
     @Override
-    @Transactional(readOnly = true)
     public Page<User> findPaginatedUsers(String search, Pageable pageable) {
-        return userRepo.findByEmailContainingIgnoreCase(search, pageable);
-    }
 
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        userRepo.deleteById(id);
-    }
+        // Wenn keine Suche → alle User paginiert zurückgeben
+        if (search == null || search.isBlank()) {
+            return userRepository.findAll(pageable);
+        }
 
-    @Override
-    public User findById(Long id) {
-        return userRepo.findById(id).orElse(null);
-    }
-
-    @Override
-    public Optional <User> findUserByEmail(String email) {
-        return userRepo.findUserByEmail(email);
+        // Wenn Suche aktiv → gefilterte User zurückgeben
+        return userRepository.findByEmailContainingIgnoreCase(search, pageable);
     }
 
     @Override
     public Page<User> findPaginatedUsers(Pageable pageable) {
-        return userRepo.findAll(pageable);
+        return userRepository.findAll(pageable);
     }
 
     @Override
     public Page<User> searchUsers(String search, Pageable pageable) {
-        // Suche nach Email (Teilstring)
-        return userRepo.findByEmailContainingIgnoreCase(search, pageable);
+        return userRepository.findByEmailContainingIgnoreCase(search, pageable);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findOptionalByEmail(email);
+    }
 
     @Override
     public boolean updateUser(User user) {
-        Optional<User> existingOpt = userRepo.findById(user.getId());
-        if (existingOpt.isPresent()) {
-            User existingUser = existingOpt.get();
-            // Aktualisiere die einzelnen Felder
-            existingUser.setEmail(user.getEmail());
-            // Nur bei einer Eingabe wird das Passwort aktualisiert
-            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-                String encodedPassword = passwordEncoder.encode(user.getPassword());
-                existingUser.setPassword(encodedPassword);
-            }
-            userRepo.save(existingUser);
-            return true;
-        }
-        return false;
-    }
+        Optional<User> existing = userRepository.findById(user.getId());
+        if (existing.isEmpty()) return false;
 
-    @Override
-    public void updateUser(UserDto userDto) {
+        User u = existing.get();
+        u.setEmail(user.getEmail());
+        u.setRole(user.getRole());
 
-        User user = userRepo.findById(userDto.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Felder aktualisieren
-
-        user.setEmail(userDto.getEmail());
-
-        // Passwort nur ändern, wenn gesetzt
-        if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            u.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
-        userRepo.save(user);
+        userRepository.save(u);
+        return true;
     }
 
     @Override
     public boolean deleteUser(Long id) {
-        if (userRepo.existsById(id)) {
-            userRepo.deleteById(id);
-            return true;
-        }
-        return false;
+        if (!userRepository.existsById(id)) return false;
+        userRepository.deleteById(id);
+        return true;
     }
 
-}
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
+    @Override
+    public void updateUser(UserDto userDto) {
+        User user = userRepository.findById(userDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User nicht gefunden"));
+
+        user.setEmail(userDto.getEmail());
+        user.setRole(userDto.getRole());
+
+        if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+
+        userRepository.save(user);
+    }
+}

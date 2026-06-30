@@ -17,7 +17,7 @@ public interface BannerService {
 
     List<Banner> findAll();
 
-
+    void delete(Long id);
 
     Banner update(BannerDto dto, MultipartFile file);
 }

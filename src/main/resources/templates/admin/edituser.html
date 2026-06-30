@@ -1,9 +1,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{title.index}">Green Raffle</title>
+    <title>Solarteur User bearbeiten</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/banneredit_style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -19,42 +20,35 @@
 
         <div class="container">
 
-            <h2 th:text="User bearbeiten">User bearbeiten</h2>
+            <h2>User bearbeiten</h2>
 
-            <form th:action="@{/edituser}" th:object="${user}" method="post">
+            <form th:action="@{/admin/edituser}" th:object="${user}" method="post">
 
-                <input type="hidden" th:field="*{id}" th:value="${user.id}">
-                <input type="hidden" th:field="*{password}" th:value="${user.password}">
+                <label>UserId:</label>
+                <input th:field="*{id}" th:value="${user.id}">
 
-                <label th:text="Email:">Email:</label>
+                <label>Passwort:</label>
+                <input th:field="*{password}" th:value="${user.password}">
+
+                <label>Email:</label>
                 <input type="email" th:field="*{email}" required>
 
-                <label th:text="Rolle:">Rolle:</label>
+                <label>Rolle:</label>
                 <select th:field="*{role}">
                     <option value="USER">USER</option>
                     <option value="ADMIN">ADMIN</option>
                 </select>
 
                 <div class="button-group">
-                    <button type="submit" class="submit" th:text="Speichern">Speichern</button>
-                    <a th:href="@{/users}" class="delete" style="text-decoration:none; text-align:center; padding:10px 20px;"
-                       th:text="Zurück">
+                    <button type="submit" class="submit">Speichern</button>
+                    <a th:href="@{/admin/users}" class="delete" style="text-decoration:none; text-align:center; padding:10px 20px;">
                         Zurück
                     </a>
                 </div>
             </form>
 
-            <hr>
-
-            <h3 th:text="#{user.edit.wallet.title}">Wallet</h3>
-            <a th:href="@{'/editwallet/' + ${user.id}}" class="submit" style="display:inline-block; margin-top:10px;"
-               th:text="Wallet bearbeiten">
-                Wallet bearbeiten
-            </a>
-
         </div>
     </div>
-
 </div>
 
 </body>

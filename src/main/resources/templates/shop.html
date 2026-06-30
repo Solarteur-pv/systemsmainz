@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+
+    <link rel="stylesheet" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet" th:href="@{/css/shop_style.css}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="page-content">
+
+    <h1 class="shop-title">Produkte</h1>
+
+    <!-- Produkt-Grid -->
+    <div class="product-grid">
+
+        <div class="product-card" th:each="p : ${products}">
+
+            <!-- Produktbild -->
+            <div class="product-image">
+                <img th:src="@{'/product/image/' + ${p.id}}" alt="Produktbild">
+            </div>
+
+            <!-- Produktinfos -->
+            <div class="product-info">
+                <h2 th:text="${p.title}">Produktname</h2>
+
+                <p class="brand" th:if="${p.brand}" th:text="${p.brand}">Marke</p>
+
+                <p class="description"
+                   th:text="${#strings.abbreviate(p.description, 120)}">
+                    Kurze Beschreibung
+                </p>
+
+                <!-- Preis (falls du später ein price-Feld hast) -->
+                <!-- <p class="price" th:text="${p.price} + ' €'">99,99 €</p> -->
+
+                <a th:href="@{'/product/' + ${p.id}}" class="btn-details">
+                    Details ansehen
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

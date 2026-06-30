@@ -10,6 +10,7 @@ import dev.yukado.systemsmainz.dto.ProductCreateDto;
 import dev.yukado.systemsmainz.dto.UserDto;
 import dev.yukado.systemsmainz.entity.Banner;
 import dev.yukado.systemsmainz.entity.HomeCard;
+import dev.yukado.systemsmainz.entity.Product;
 import dev.yukado.systemsmainz.entity.User;
 import dev.yukado.systemsmainz.service.banner.BannerService;
 import dev.yukado.systemsmainz.service.homecard.HomeCardService;
@@ -26,10 +27,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,20 +40,19 @@ import java.util.List;
 @Controller("/admin")
 public class AdminController {
 
-    @Autowired
-    private AuditLogRepository auditLogRepository;
 
-    @Autowired
-    private AdminStatsService statsService;
+    private final AuditLogRepository auditLogRepository;
+    private final AdminStatsService statsService;
     private final UserDetailsService userDetailsService;
     private final UserService userService;
     private final BannerService bannerService;
-
     private final HomeCardService homecardService;
     private final ProductService productService;
 
 
-    public AdminController(UserDetailsService userDetailsService, UserService userService, BannerService bannerService, HomeCardService homecardService, ProductService productService) {
+    public AdminController(AuditLogRepository auditLogRepository, AdminStatsService statsService, UserDetailsService userDetailsService, UserService userService, BannerService bannerService, HomeCardService homecardService, ProductService productService) {
+        this.auditLogRepository = auditLogRepository;
+        this.statsService = statsService;
         this.userDetailsService = userDetailsService;
         this.userService = userService;
         this.bannerService = bannerService;
@@ -180,6 +177,17 @@ public class AdminController {
         return "redirect:/admin/banner";
     }
 
+    @Audit(action = "ADMIN_BANNER_DELETED")
+    @PostMapping("/banner_delete")
+    public String deleteBanner(@RequestParam("id") Long id,
+                               RedirectAttributes redirectAttributes) {
+
+        bannerService.delete(id);
+
+        redirectAttributes.addFlashAttribute("message", "Banner gelöscht!");
+        return "redirect:/admin/banner";
+    }
+
     @Audit(action = "VIEW_ADMIN_HOMECARDS")
     @GetMapping("/admin/homecard")
     public String getHomeCard(Model model, Principal principal){
@@ -287,18 +295,22 @@ public class AdminController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
         User user = userService.findById(id1);
-
+        String userName = "A" + id1;
         Page<User> usersPage = userService.findPaginatedUsers(search, pageable);
 
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("user", user);
+
         model.addAttribute("usersPage", usersPage);
+        model.addAttribute("users", usersPage.getContent());
         model.addAttribute("search", search);
-
-        // wichtig für Formulare
+        model.addAttribute("user", user);
         model.addAttribute("userDto", new UserDto());
+        model.addAttribute("success", success);
+        model.addAttribute("updated", updated);
+        model.addAttribute("userName", userName);
+        model.addAttribute("userDetails", userDetails);
 
-        // Meldungen
         if (success != null) {
             model.addAttribute("message", "Registrierung erfolgreich!");
         }
@@ -309,6 +321,7 @@ public class AdminController {
 
         return "admin/users";
     }
+
 
     @Audit(action = "ADMIN_USER_CREATED")
     @PostMapping("/admin/reg_users")
@@ -323,6 +336,25 @@ public class AdminController {
         userService.save(userDto);
 
         return "redirect:/admin/users?success";
+    }
+
+    @Audit(action = "VIEW_ADMIN_EDIT_USER")
+    @GetMapping("/admin/edituser/{id}")
+    public String editUser(@PathVariable Long id, Model model, Principal principal) {
+
+        User user = userService.findById(id);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
+        String userName = "A" + id1;
+
+        if (user == null) {
+            model.addAttribute("message", "Benutzer wurde nicht gefunden.");
+            return "redirect:/admin/users";
+        }
+        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("userName", userName);
+        model.addAttribute("user", user);
+        return "admin/edituser";
     }
 
     @Audit(action = "ADMIN_USER_UPDATED")
@@ -340,14 +372,44 @@ public class AdminController {
         return "redirect:/admin/users?updated";
     }
 
+    @GetMapping("/admin/products")
+    public String listProducts(
+            @RequestParam(required = false) String search,
+            Pageable pageable, Principal principal,
+            Model model) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
+        String userName = "A" + id1;
+        Page<Product> products = productService.findPaginatedProducts(search, pageable);
+
+        model.addAttribute("products", products);
+        model.addAttribute("search", search);
+        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("userName", userName);
+
+        return "admin/products";
+    }
+
     @Audit(action = "VIEW_ADMIN_PRODUCT_CREATED")
     @GetMapping("/admin/product_create")
     public String showCreateProductForm(
             @RequestParam(required = false) String success,
-            Model model) {
+            Model model,
+            Principal principal) {
+
+        // Sicherstellen, dass Principal existiert
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        Long id1 = userService.findByEmail(userDetails.getUsername()).getId();
+        String userName = "A" + id1;
 
         model.addAttribute("productDto", new ProductCreateDto());
         model.addAttribute("categories", productService.getAllCategories());
+        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("userName", userName);
 
         if (success != null) {
             model.addAttribute("message", "Produkt erfolgreich angelegt!");
@@ -356,8 +418,9 @@ public class AdminController {
         return "admin/product_create";
     }
 
+
     @Audit(action = "ADMIN_PRODUCT_CREATED")
-    @PostMapping("/admin/product_create")
+    @PostMapping("/admin/product_new")
     public String createProduct(
             @ModelAttribute("productDto") ProductCreateDto dto,
             BindingResult bindingResult,

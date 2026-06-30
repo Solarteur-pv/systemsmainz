@@ -5,6 +5,7 @@
     <title>Solarteur HomeCards</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/homecard_style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -46,12 +47,12 @@
                 <div>
                     <label>Active:</label>
                     <select name="active">
-                        <option value="true" th:text="active">active</option>
-                        <option value="false" th:text="inactive">inactive</option>
+                        <option value="true">active</option>
+                        <option value="false">inactive</option>
                     </select>
                 </div>
 
-                <button type="submit" th:text="Upload">Upload</button>
+                <button type="submit">Upload</button>
             </form>
         </section>
 
@@ -72,13 +73,13 @@
             <table>
                 <thead>
                 <tr>
-                    <th th:text="ID">ID</th>
-                    <th th:text="Filename">Filename</th>
-                    <th th:text="Title">Title</th>
-                    <th th:text="HomeCardText">HomeCardText</th>
-                    <th th:text="Active">Active</th>
-                    <th th:text="Erstellt am">Erstellt am</th>
-                    <th th:text="Aktion">Aktion</th>
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Title</th>
+                    <th>HomeCardText</th>
+                    <th>Active</th>
+                    <th>Erstellt am</th>
+                    <th>Aktion</th>
                 </tr>
                 </thead>
 
@@ -92,9 +93,9 @@
                     <td th:text="${b.created_at}"></td>
 
                     <td>
-                        <form method="get" th:action="@{/homecard_edit}">
+                        <form method="get" th:action="@{/admin/homecard_edit}">
                             <input type="hidden" name="id" th:value="${b.id}">
-                            <button type="submit" class="btn-success" th:text="Bearbeiten">Bearbeiten</button>
+                            <button type="submit" class="btn-success">Bearbeiten</button>
                         </form>
                     </td>
                 </tr>
@@ -104,7 +105,7 @@
         </section>
 
     </div>
-
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
 
 </body>

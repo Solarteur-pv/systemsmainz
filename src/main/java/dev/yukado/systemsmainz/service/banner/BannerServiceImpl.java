@@ -80,4 +80,12 @@ public class BannerServiceImpl implements BannerService {
         return bannerRepo.findAll();
     }
 
+    @Override
+    public void delete(Long id) {
+        if (!bannerRepo.existsById(id)) {
+            throw new IllegalArgumentException("Banner nicht gefunden");
+        }
+
+        bannerRepo.deleteById(id);
+    }
 }

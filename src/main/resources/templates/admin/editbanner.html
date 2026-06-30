@@ -18,10 +18,10 @@
 
         <h2>Banner bearbeiten</h2>
 
-        <form th:action="@{/banner_edit}" method="post" th:object="${banner}" enctype="multipart/form-data">
+        <form th:action="@{/admin/banner_edit}" method="post" th:object="${banner}" enctype="multipart/form-data">
 
             <!-- ID -->
-            <label th:text="Id:">Id:</label>
+            <label>Id:</label>
             <input type="text" th:field="*{id}" readonly>
 
             <!-- Aktuelles Bild -->
@@ -58,7 +58,7 @@
             <!-- Buttons -->
             <div class="button-group">
                 <button type="submit">Speichern</button>
-                <a th:href="@{/banner}" class="delete" style="text-decoration:none; padding:10px 20px;"
+                <a th:href="@{/admin/banner}" class="delete" style="text-decoration:none; padding:10px 20px;"
                    >
                     Zurück
                 </a>

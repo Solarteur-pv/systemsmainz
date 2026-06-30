@@ -177,8 +177,8 @@ body {
 
 .homecard-textarea {
     width: 100%;
-    background: #1a1a1a;
-    color: #e0e0e0;
+    background: white;
+    color: black;
     border: 1px solid #333;
     border-radius: 10px; /* vorher 8px */
     padding: 12px; /* vorher 10px */

@@ -17,16 +17,24 @@
 
 <div class="page-content">
     <section class="gr-slider">
+
+        <!-- Slides -->
         <div th:each="b, iter : ${banners}"
              th:class="'gr-slide' + (iter.index == 0 ? ' active' : '')">
             <img th:src="@{'/banner/image/' + ${b.id}}"
                  alt="Banner"
                  class="gr-slide-image">
             <div class="gr-caption">
-                <h2>Banner Text</h2>
+                <h2 th:text="${b.bannerText}">Banner Text</h2>
             </div>
         </div>
+
+        <!-- Navigation arrows -->
+        <div class="gr-prev">&#10094;</div>
+        <div class="gr-next">&#10095;</div>
+
     </section>
+
 
     <section class="content"  th:if="false">
           <div class="home-cards">

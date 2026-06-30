@@ -12,22 +12,17 @@ public class ProductPrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Ein Produkt hat genau einen Preis (für B2C)
-    @OneToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @OneToOne(optional = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    // Brutto-Verkaufspreis für deinen Shop
     @Column(nullable = false)
     private BigDecimal priceGross;
 
-    // Netto-Preis (optional, aber nützlich für Berechnungen)
     private BigDecimal priceNet;
 
-    // Mehrwertsteuer (19% oder 7%)
     private BigDecimal vatRate;
 
-    // Für Sync mit UNI Elektro & Amazon
     private LocalDateTime lastUpdate;
 
     public Long getId() {
@@ -78,4 +73,6 @@ public class ProductPrice {
         this.lastUpdate = lastUpdate;
     }
 }
+
+
 

@@ -2,3 +2,47 @@
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
 Table "HTE_USERS" already exists; SQL statement:
 create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-29 19:35:01.204971+02:00 jdbc[29]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-29 19:35:03.551978+02:00 jdbc[39]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 12:39:23.112507+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 12:39:25.443289+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 14:37:41.202076+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 14:37:43.534508+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 14:43:22.826411+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 14:43:25.134796+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 15:06:52.111098+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 15:06:54.485315+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]
+2026-06-30 15:13:43.551710+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "HTE_USERS" besteht bereits
+Table "HTE_USERS" already exists; SQL statement:
+create global temporary table HTE_users(rn_ integer not null, id bigint, email varchar(191), password varchar(191), role varchar(191), primary key (rn_)) transactional [42101-240]

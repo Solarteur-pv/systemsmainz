@@ -26,11 +26,9 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product createProduct(ProductCreateDto dto) {
 
-        // Kategorie laden
         Category category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        // Produkt anlegen
         Product product = new Product();
         product.setSku(dto.getSku());
         product.setEan(dto.getEan());
@@ -49,7 +47,6 @@ public class ProductServiceImpl implements ProductService {
 
         product = productRepository.save(product);
 
-        // Preis speichern
         ProductPrice price = new ProductPrice();
         price.setProduct(product);
         price.setPriceGross(dto.getPriceGross());
@@ -57,14 +54,12 @@ public class ProductServiceImpl implements ProductService {
         price.setLastUpdate(LocalDateTime.now());
         priceRepository.save(price);
 
-        // Stock speichern
         ProductStock stock = new ProductStock();
         stock.setProduct(product);
         stock.setStock(dto.getStock());
         stock.setLastUpdate(LocalDateTime.now());
         stockRepository.save(stock);
 
-        // Bilder speichern
         int pos = 1;
         for (String url : dto.getImageUrls()) {
             if (url == null || url.isBlank()) continue;
@@ -96,5 +91,20 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findAll(pageable);
     }
-}
 
+    @Override
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> findPaginatedProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Product findById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Produkt nicht gefunden"));
+    }
+}
