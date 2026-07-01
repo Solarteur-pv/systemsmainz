@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Eigene Kategorien</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banner_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div class="page-content">
+    <div class="content">
+
+        <!-- Kategorie erstellen -->
+        <section class="create-user">
+            <h2>Neue Kategorie erstellen</h2>
+
+            <form th:action="@{/admin/own-categories}" method="post">
+
+                <div>
+                    <label for="name">Name der Kategorie:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="description">Beschreibung:</label>
+                    <input type="text" id="description" name="description">
+                </div>
+
+                <button type="submit">Speichern</button>
+            </form>
+        </section>
+
+        <!-- Kategorie Liste -->
+        <section class="user-list">
+            <h2>Kategorien</h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Beschreibung</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="c : ${categories}">
+                    <td th:text="${c.id}"></td>
+                    <td th:text="${c.name}"></td>
+                    <td th:text="${c.description}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

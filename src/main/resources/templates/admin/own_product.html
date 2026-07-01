@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Eigene Produkte</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banner_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div class="page-content">
+    <div class="content">
+
+        <!-- Produkt erstellen -->
+        <section class="create-user">
+            <h2>Neues Produkt erstellen</h2>
+
+            <form th:action="@{/admin/own-products}" method="post">
+
+                <div>
+                    <label for="sku">SKU:</label>
+                    <input type="text" id="sku" name="sku" required>
+                </div>
+
+                <div>
+                    <label for="title">Titel:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div>
+                    <label for="description">Beschreibung:</label>
+                    <input type="text" id="description" name="description">
+                </div>
+
+                <div>
+                    <label for="brand">Marke:</label>
+                    <input type="text" id="brand" name="brand">
+                </div>
+
+                <div>
+                    <label for="ean">EAN:</label>
+                    <input type="text" id="ean" name="ean">
+                </div>
+
+                <div>
+                    <label for="priceGross">Preis (Brutto):</label>
+                    <input type="number" step="0.01" id="priceGross" name="priceGross">
+                </div>
+
+                <div>
+                    <label for="priceNet">Preis (Netto):</label>
+                    <input type="number" step="0.01" id="priceNet" name="priceNet">
+                </div>
+
+                <div>
+                    <label for="vatRate">MwSt (%):</label>
+                    <input type="number" id="vatRate" name="vatRate">
+                </div>
+
+                <div>
+                    <label for="stock">Lagerbestand:</label>
+                    <input type="number" id="stock" name="stock">
+                </div>
+
+                <div>
+                    <label for="category">Kategorie:</label>
+                    <select id="category" name="category.id">
+                        <option value="">Keine Kategorie</option>
+                        <option th:each="cat : ${categories}"
+                                th:value="${cat.id}"
+                                th:text="${cat.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit">Speichern</button>
+            </form>
+        </section>
+
+        <!-- Produkt Liste -->
+        <section class="user-list">
+            <h2>Produkte</h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>SKU</th>
+                    <th>Titel</th>
+                    <th>Marke</th>
+                    <th>Preis</th>
+                    <th>Kategorie</th>
+                    <th>Aktion</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="p : ${products}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.sku}"></td>
+                    <td th:text="${p.title}"></td>
+                    <td th:text="${p.brand}"></td>
+                    <td th:text="${p.priceGross}"></td>
+                    <td th:text="${p.category != null ? p.category.name : '—'}"></td>
+
+                    <td>
+                        <form method="get" th:action="@{/admin/own-product-images}">
+                            <input type="hidden" name="productId" th:value="${p.id}">
+                            <button type="submit" class="btn-success">Bilder</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

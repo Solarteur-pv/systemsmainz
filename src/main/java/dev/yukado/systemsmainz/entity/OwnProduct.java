@@ -1,8 +1,6 @@
 package dev.yukado.systemsmainz.entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,11 +12,10 @@ public class OwnProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String sku;          // deine eigene SKU
+    private String sku;
     private String title;
     private String description;
-
-    private String brand;        // z.B. eigene Marke oder Lieferantenmarke
+    private String brand;
     private String ean;
 
     private BigDecimal priceGross;
@@ -28,8 +25,8 @@ public class OwnProduct {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = true)
-    private Category category;   // optional, kein Fehler mehr
+    @JoinColumn(name = "own_category_id")
+    private OwnCategory category;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -114,11 +111,11 @@ public class OwnProduct {
         this.stock = stock;
     }
 
-    public Category getCategory() {
+    public OwnCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(OwnCategory category) {
         this.category = category;
     }
 
@@ -138,4 +135,5 @@ public class OwnProduct {
         this.updatedAt = updatedAt;
     }
 }
+
 

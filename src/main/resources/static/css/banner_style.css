@@ -20,11 +20,11 @@
    DARK MODE (body.dark)
 ========================================= */
 body.dark {
-    --bg: #121212;
-    --text: #e5e5e5;
-    --card-bg: #1e1e1e;
+    --bg: #e5e5e5;
+    --text: #121212;
+    --card-bg: white;
     --card-shadow: 0 3px 10px rgba(0,0,0,0.45);
-    --input-bg: #1a1a1a;
+    --input-bg: #e5e5e5;;
     --input-border: #444;
     --button-bg: #4BC0C0;
     --button-text: #000;
@@ -50,7 +50,8 @@ body {
    CREATE BANNER BOX
 ========================================= */
 .create-user {
-    background: var(--card-bg);
+    background: #e5e5e5;
+    color: #1a1a1a;
     padding: 26px; /* vorher 20px */
     border-radius: 14px; /* vorher 12px */
     box-shadow: var(--card-shadow);

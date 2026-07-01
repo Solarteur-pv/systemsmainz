@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin – Produktbilder</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/banner_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/header-admin :: header"></div>
+
+<div class="page-content">
+    <div class="content">
+
+        <!-- Bild hinzufügen -->
+        <section class="create-user">
+            <h2>Bild hinzufügen</h2>
+
+            <form th:action="@{/admin/own-product-images}" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="productId" th:value="${product.id}">
+
+                <div>
+                    <label for="file">Bild auswählen:</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                </div>
+
+                <div>
+                    <label for="position">Position:</label>
+                    <input type="number" id="position" name="position" value="1">
+                </div>
+
+                <button type="submit">Hochladen</button>
+            </form>
+        </section>
+
+        <!-- Bild Liste -->
+        <section class="user-list">
+            <h2>Bilder für Produkt: <span th:text="${product.title}"></span></h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bild</th>
+                    <th>Position</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="img : ${images}">
+                    <td th:text="${img.id}"></td>
+
+                    <td>
+                        <img th:src="${img.url}" style="max-width: 120px; border-radius: 8px;">
+                    </td>
+
+                    <td th:text="${img.position}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

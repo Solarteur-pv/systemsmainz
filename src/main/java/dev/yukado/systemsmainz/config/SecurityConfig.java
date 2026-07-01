@@ -45,9 +45,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/", "/about", "/index",
                                 "/favicon.ico", "/shop", "/referenzen", "/login", "/logout",
-                                "/banner/image/**", "/homecard/image/**", "/error")
+                                "/banner/image/**", "/homecard/image/**", "/error", "/fargments/header/**", "/shop/**")
                         .permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/dashboard").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/banner/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/products/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/product_create").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/viewlogs/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/users/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/bannerupload/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/homecardupload/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/homecard_edit/**").hasAnyAuthority("ADMIN")
@@ -56,7 +61,10 @@ public class SecurityConfig {
                         .requestMatchers("/admin/edituser/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/registration_a/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/product_new").hasAnyAuthority("ADMIN")
-
+                        .requestMatchers("/admin/own_category/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/own_product/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/admin/own_product_images/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/fragments/header-admin/**").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
 

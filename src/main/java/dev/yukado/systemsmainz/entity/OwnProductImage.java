@@ -1,7 +1,6 @@
 package dev.yukado.systemsmainz.entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "own_product_images")

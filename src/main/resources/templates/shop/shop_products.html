@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produkte</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ownproduct_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="product-grid">
+
+    <div class="product-card" th:each="p : ${products}">
+
+        <!-- Produktbild -->
+        <img th:src="${p.images != null && p.images.size() > 0 ? p.images[0].url : '/img/no-image.png'}">
+
+        <!-- Titel -->
+        <div class="product-title" th:text="${p.title}"></div>
+
+        <!-- Preis -->
+        <div class="product-price" th:text="${p.priceGross + ' €'}"></div>
+
+        <!-- Details Button -->
+        <form th:action="@{/shop/product}" method="get">
+            <input type="hidden" name="id" th:value="${p.id}">
+            <button class="btn-details">Details</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
