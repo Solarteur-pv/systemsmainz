@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur – Impressum</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/impressum_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <section class="hero-section">
+        <h1>Impressum</h1>
+        <p>Angaben gemäß § 5 TMG</p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Solarteur</h2>
+        <p>
+            Musterstraße 12<br>
+            65479 Raunheim<br>
+            Deutschland
+        </p>
+
+        <p>
+            Telefon: 06142 / 123456<br>
+            E-Mail: info@solarteur.de
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Vertreten durch</h2>
+        <p>
+            Yusuf Kağan Doğruyol
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Umsatzsteuer-ID</h2>
+        <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+            DE123456789
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Berufsbezeichnung</h2>
+        <p>
+            Elektrotechniker / Photovoltaik-Fachbetrieb<br>
+            Verliehen in Deutschland
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Haftung für Inhalte</h2>
+        <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Für fremde Inhalte übernehmen wir keine Haftung.
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Haftung für Links</h2>
+        <p>
+            Unsere Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
+            Für diese Inhalte übernehmen wir keine Gewähr.
+        </p>
+    </section>
+
+    <section class="imp-section">
+        <h2>Urheberrecht</h2>
+        <p>
+            Die durch uns erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen Urheberrecht.
+            Eine Vervielfältigung oder Weitergabe ist ohne schriftliche Zustimmung nicht gestattet.
+        </p>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

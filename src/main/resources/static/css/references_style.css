@@ -1,0 +1,82 @@
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+}
+
+.hero-section {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.hero-text h1 {
+    font-size: 2.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.hero-text p {
+    font-size: 1.02rem;
+    color: #555;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.section-wide {
+    margin-bottom: 3rem;
+}
+
+.section-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.ref-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.ref-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+.ref-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.8rem;
+}
+
+.ref-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.ref-meta i {
+    margin-right: 0.25rem;
+    color: #0b7285;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+    }
+}

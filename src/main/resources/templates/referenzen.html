@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur – Referenzen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/references_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>Referenzen</h1>
+            <p>Ausgewählte Projekte aus Photovoltaik, Elektrotechnik und Heizsystemen im Rhein‑Main‑Gebiet.</p>
+        </div>
+        <div class="hero-image">
+            <img src="/images/references/hero-placeholder.jpg" alt="Projektübersicht">
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Photovoltaik‑Projekte</h2>
+            <div class="ref-grid">
+                <article class="ref-card">
+                    <h3>Einfamilienhaus – Dachanlage</h3>
+                    <p>PV‑Anlage mit Mikrowechselrichtern und Monitoring, optimiert für begrenzte Dachfläche.</p>
+                    <div class="ref-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Rhein‑Main‑Gebiet</span>
+                        <span><i class="fa-solid fa-calendar"></i> seit 2018</span>
+                    </div>
+                </article>
+
+                <article class="ref-card">
+                    <h3>Gewerbebetrieb – PV mit Speicher</h3>
+                    <p>Lastoptimierte Anlage mit Batteriesystem zur Reduktion von Netzbezug und Lastspitzen.</p>
+                    <div class="ref-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Industriegebiet</span>
+                        <span><i class="fa-solid fa-calendar"></i> seit 2020</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Elektrotechnik & Beleuchtung</h2>
+            <div class="ref-grid">
+                <article class="ref-card">
+                    <h3>Altbau‑Modernisierung</h3>
+                    <p>Komplette Erneuerung der Elektroinstallation inkl. Netzwerk, Beleuchtung und Schutztechnik.</p>
+                    <div class="ref-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Wohnhaus</span>
+                        <span><i class="fa-solid fa-calendar"></i> seit 2017</span>
+                    </div>
+                </article>
+
+                <article class="ref-card">
+                    <h3>Außenbeleuchtung – Architektur</h3>
+                    <p>Planung und Umsetzung von Lichtkonzepten mit BEGA und ERCO für Außenbereiche.</p>
+                    <div class="ref-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Gewerbeobjekt</span>
+                        <span><i class="fa-solid fa-calendar"></i> seit 2019</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Heizsysteme</h2>
+            <div class="ref-grid">
+                <article class="ref-card">
+                    <h3>Natursteinheizung – Wohnräume</h3>
+                    <p>Effiziente Elektroheizungen mit Natursteinflächen für gleichmäßige Wärmeverteilung.</p>
+                    <div class="ref-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Einfamilienhaus</span>
+                        <span><i class="fa-solid fa-calendar"></i> seit 2016</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
+    

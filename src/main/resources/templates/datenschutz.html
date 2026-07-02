@@ -1,10 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur – Datenschutz</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/privacy_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <section class="hero-section">
+        <h1>Datenschutzerklärung</h1>
+        <p>Informationen zum Umgang mit personenbezogenen Daten gemäß DSGVO.</p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>1. Verantwortlicher</h2>
+        <p>
+            Solarteur<br>
+            Musterstraße 12<br>
+            65479 Raunheim<br>
+            E-Mail: info@solarteur.de<br>
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>2. Erhebung und Verarbeitung personenbezogener Daten</h2>
+        <p>
+            Wir verarbeiten personenbezogene Daten nur, wenn dies gesetzlich erlaubt ist oder Sie
+            eingewilligt haben. Personenbezogene Daten sind alle Informationen, die sich auf eine
+            identifizierte oder identifizierbare natürliche Person beziehen.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>3. Datenverarbeitung beim Besuch unserer Website</h2>
+        <p>Beim Aufrufen unserer Website werden automatisch folgende Daten verarbeitet:</p>
+        <ul>
+            <li>IP-Adresse</li>
+            <li>Datum und Uhrzeit des Zugriffs</li>
+            <li>Browsertyp und Version</li>
+            <li>Verwendetes Betriebssystem</li>
+            <li>Referrer-URL</li>
+        </ul>
+        <p>
+            Diese Daten sind technisch notwendig, um die Website korrekt darzustellen und die
+            Systemsicherheit zu gewährleisten.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>4. Kontaktformular & Kundenanfragen</h2>
+        <p>
+            Wenn Sie uns über ein Formular oder per E-Mail kontaktieren, speichern wir die von Ihnen
+            angegebenen Daten zur Bearbeitung der Anfrage. Eine Weitergabe an Dritte erfolgt nicht.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>5. Cookies</h2>
+        <p>
+            Unsere Website verwendet Cookies, um die Nutzung zu erleichtern und bestimmte Funktionen
+            bereitzustellen. Sie können Cookies jederzeit in Ihrem Browser deaktivieren.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>6. Benutzerkonto & Warenkorb</h2>
+        <p>
+            Wenn Sie ein Benutzerkonto anlegen oder Bestellungen durchführen, speichern wir die
+            notwendigen Daten zur Abwicklung der Bestellung. Dazu gehören:
+        </p>
+        <ul>
+            <li>Name</li>
+            <li>Adresse</li>
+            <li>E-Mail-Adresse</li>
+            <li>Bestell- und Warenkorbdaten</li>
+        </ul>
+        <p>
+            Die Daten werden ausschließlich zur Vertragsabwicklung verwendet.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>7. Weitergabe von Daten</h2>
+        <p>
+            Eine Weitergabe Ihrer Daten erfolgt nur, wenn dies zur Vertragserfüllung notwendig ist
+            (z. B. Versanddienstleister) oder gesetzliche Verpflichtungen bestehen.
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>8. Ihre Rechte</h2>
+        <p>Sie haben jederzeit das Recht auf:</p>
+        <ul>
+            <li>Auskunft über gespeicherte Daten</li>
+            <li>Berichtigung unrichtiger Daten</li>
+            <li>Löschung Ihrer Daten</li>
+            <li>Einschränkung der Verarbeitung</li>
+            <li>Datenübertragbarkeit</li>
+            <li>Widerspruch gegen die Verarbeitung</li>
+        </ul>
+        <p>
+            Kontaktieren Sie uns hierzu unter: info@solarteur.de
+        </p>
+    </section>
+
+    <section class="privacy-section">
+        <h2>9. Änderungen dieser Datenschutzerklärung</h2>
+        <p>
+            Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an aktuelle
+            rechtliche Anforderungen oder Änderungen unserer Leistungen anzupassen.
+        </p>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

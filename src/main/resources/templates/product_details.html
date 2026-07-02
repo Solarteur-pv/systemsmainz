@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.title}">Produktdetails</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/product_details.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <!-- PRODUCT HEADER -->
+    <section class="product-header">
+        <div class="product-image">
+            <img th:src="${product.images[0].url}" alt="Produktbild">
+        </div>
+
+        <div class="product-info">
+            <h1 th:text="${product.title}">Produktname</h1>
+
+            <p class="product-short" th:text="${product.shortDescription}">
+                Kurze Beschreibung des Produkts.
+            </p>
+
+            <div class="price-box">
+                <span class="price-net"
+                      th:text="${#numbers.formatDecimal(product.priceNet, 1, 'POINT', 2, 'POINT')} + ' € Netto'">
+                    0,00 € Netto
+                </span>
+
+                <span class="price-gross"
+                      th:text="${#numbers.formatDecimal(product.priceGross, 1, 'POINT', 2, 'POINT')} + ' € Brutto'">
+                    0,00 € Brutto
+                </span>
+            </div>
+
+            <!-- ADD TO CART -->
+            <form th:action="@{/cart/add}" method="post" class="add-cart-form">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <button class="btn-add-cart">
+                    <i class="fa-solid fa-cart-plus"></i> In den Warenkorb
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAILS -->
+    <section class="product-details">
+        <h2>Produktbeschreibung</h2>
+        <p th:text="${product.description}">
+            Ausführliche Beschreibung des Produkts.
+        </p>
+    </section>
+
+    <!-- TECHNICAL DATA -->
+    <section class="product-specs" th:if="${product.specs != null}">
+        <h2>Technische Daten</h2>
+
+        <table>
+            <tbody>
+            <tr th:each="spec : ${product.specs}">
+                <td th:text="${spec.key}">Eigenschaft</td>
+                <td th:text="${spec.value}">Wert</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- MORE IMAGES -->
+    <section class="product-gallery" th:if="${product.images.size() > 1}">
+        <h2>Weitere Bilder</h2>
+
+        <div class="gallery-grid">
+            <img th:each="img : ${product.images}"
+                 th:src="${img.url}"
+                 alt="Produktbild"
+                 class="gallery-img">
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

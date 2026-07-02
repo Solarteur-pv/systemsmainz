@@ -63,6 +63,21 @@ public class AuthController {
 
         return "referenzen";
     }
+    @GetMapping("/partner")
+    public String getPartner() {
+
+        return "partner";
+    }
+    @GetMapping("/datenschutz")
+    public String getDatenschutz() {
+
+        return "datenschutz";
+    }
+    @GetMapping("/impressum")
+    public String getImpressum() {
+
+        return "impressum";
+    }
 
     @GetMapping("/homecard/image/{id}")
     public ResponseEntity<byte[]> getHomeCardImage(@PathVariable Long id) {

@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur – Partner</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/partner_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>Partner & Hersteller</h1>
+            <p>Für unsere Projekte setzen wir konsequent auf geprüfte Markenprodukte und etablierte Lieferanten.</p>
+        </div>
+        <div class="hero-image">
+            <img src="/images/partner/hero-placeholder.jpg" alt="Partnernetzwerk">
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Lieferanten & Großhandel</h2>
+            <div class="partner-grid">
+                <div class="partner-card">
+                    <i class="fa-solid fa-truck-fast partner-icon"></i>
+                    <h3>Unielektro</h3>
+                    <p>Elektrogroßhandel für professionelle Komponenten und schnelle Lieferketten.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-truck partner-icon"></i>
+                    <h3>Sonepar</h3>
+                    <p>Breites Sortiment für Elektro‑ und Gebäudetechnik.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-warehouse partner-icon"></i>
+                    <h3>Rink</h3>
+                    <p>Regionale Versorgung mit Elektromaterial und Zubehör.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Technologie‑Partner</h2>
+            <div class="partner-grid">
+                <div class="partner-card">
+                    <i class="fa-solid fa-solar-panel partner-icon"></i>
+                    <h3>Atmoce</h3>
+                    <p>Mikrowechselrichter, Batteriesysteme und Cloud‑Monitoring für PV‑Anlagen.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-phone-volume partner-icon"></i>
+                    <h3>Agfeo</h3>
+                    <p>Kommunikations‑ und Telefonanlagen für Unternehmen.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-lightbulb partner-icon"></i>
+                    <h3>BEGA, ERCO, Trilux</h3>
+                    <p>Architekturbeleuchtung und professionelle Lichttechnik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Gebäudetechnik & Schutz</h2>
+            <div class="partner-grid">
+                <div class="partner-card">
+                    <i class="fa-solid fa-house-chimney partner-icon"></i>
+                    <h3>Busch‑Jaeger, Gira, Hager, Eltako</h3>
+                    <p>Schalterprogramme, Smart‑Home‑Lösungen und Gebäudetechnik.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-bolt partner-icon"></i>
+                    <h3>Dehn, OBO, Phoenix Contact</h3>
+                    <p>Blitz‑ und Überspannungsschutz für sichere Anlagen.</p>
+                </div>
+                <div class="partner-card">
+                    <i class="fa-solid fa-satellite-dish partner-icon"></i>
+                    <h3>Kathrein, Wisi</h3>
+                    <p>SAT‑ und Antennentechnik für TV‑ und Signalverteilung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

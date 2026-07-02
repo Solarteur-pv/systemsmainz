@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Solarteur – Das Unternehmen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/company_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer_style.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="page-container">
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>Das Unternehmen</h1>
+            <p>Solarteur verbindet moderne Elektrotechnik mit zukunftsfähigen Energielösungen im Rhein‑Main‑Gebiet.</p>
+        </div>
+        <div class="hero-image">
+            <img src="/images/company/hero-placeholder.jpg" alt="Solarteur Team">
+        </div>
+    </section>
+
+    <section class="section-grid">
+        <div class="section-card">
+            <i class="fa-solid fa-bolt-lightning section-icon"></i>
+            <h2>Wer wir sind</h2>
+            <p>
+                Seit über einem Jahrzehnt planen und realisieren wir Elektro‑ und Energiesysteme für private,
+                gewerbliche und industrielle Kunden. Präzise, sauber und zuverlässig.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <i class="fa-solid fa-sun section-icon"></i>
+            <h2>Unsere Mission</h2>
+            <p>
+                Wir bringen klassische Elektrotechnik und moderne Photovoltaik zusammen – mit klarer Planung,
+                hochwertigen Komponenten und langfristiger Betreuung.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <i class="fa-solid fa-diagram-project section-icon"></i>
+            <h2>Schwerpunkte</h2>
+            <ul>
+                <li>Photovoltaik & Energiespeicher</li>
+                <li>Elektroinstallation & Gebäudetechnik</li>
+                <li>Beleuchtungskonzepte & Lichtdesign</li>
+                <li>Netzwerk‑ & Kommunikationssysteme</li>
+                <li>Heizsysteme & Natursteinheizungen</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Standorte</h2>
+            <div class="locations">
+                <div class="location-card">
+                    <h3>Mudershausen</h3>
+                    <p>Technischer Hauptsitz, Lager und Werkstatt.</p>
+                </div>
+                <div class="location-card">
+                    <h3>Raunheim</h3>
+                    <p>Büro, Projektkoordination und Logistik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wide">
+        <div class="section-content">
+            <h2>Warum Solarteur</h2>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Über 10 Jahre Erfahrung</span>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Zertifizierte Fachkräfte</span>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Digitale Planung & Dokumentation</span>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Hochwertige Markenprodukte</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

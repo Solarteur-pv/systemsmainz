@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/", "/about", "/index",
                                 "/favicon.ico", "/shop", "/referenzen", "/login", "/logout",
                                 "/banner/image/**", "/homecard/image/**", "/error", "/fargments/header/**", "/shop/**",
-                                "/cart/**")
+                                "/cart/**", "/partner/**", "/datenschutz/**", "/impressum/**")
                         .permitAll()
                         .requestMatchers("/admin/dashboard").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/banner/**").hasAnyAuthority("ADMIN")
