@@ -4,13 +4,14 @@ import dev.yukado.systemsmainz.entity.Cart;
 
 public interface CartService {
 
-    Cart getCartForSession(String sessionId);
+    Cart getCartForUser(Long userId);
 
-    void addToCart(String sessionId, Long productId, int quantity);
+    void addToCart(Long userId, Long productId, int quantity);
 
-    void removeFromCart(String sessionId, Long productId);
+    void removeFromCart(Long userId, Long productId);
 
-    int getItemCount(String sessionId);
+    int getItemCount(Long userId);
 
-    void clearCart(String sessionId);
+    void clearCart(Long userId);
 }
+

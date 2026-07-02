@@ -45,7 +45,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/", "/about", "/index",
                                 "/favicon.ico", "/shop", "/referenzen", "/login", "/logout",
-                                "/banner/image/**", "/homecard/image/**", "/error", "/fargments/header/**", "/shop/**")
+                                "/banner/image/**", "/homecard/image/**", "/error", "/fargments/header/**", "/shop/**",
+                                "/cart/**")
                         .permitAll()
                         .requestMatchers("/admin/dashboard").hasAnyAuthority("ADMIN")
                         .requestMatchers("/admin/banner/**").hasAnyAuthority("ADMIN")

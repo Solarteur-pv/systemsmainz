@@ -18,38 +18,31 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepo;
     private final CartItemRepository itemRepo;
     private final ProductRepository productRepo;
-    private final ProductPriceRepository priceRepo;
 
     public CartServiceImpl(CartRepository cartRepo,
                            CartItemRepository itemRepo,
-                           ProductRepository productRepo,
-                           ProductPriceRepository priceRepo) {
+                           ProductRepository productRepo) {
         this.cartRepo = cartRepo;
         this.itemRepo = itemRepo;
         this.productRepo = productRepo;
-        this.priceRepo = priceRepo;
     }
 
     @Override
-    public Cart getCartForSession(String sessionId) {
-        return cartRepo.findBySessionId(sessionId)
+    public Cart getCartForUser(Long userId) {
+        return cartRepo.findById(userId)
                 .orElseGet(() -> {
                     Cart c = new Cart();
-                    c.setSessionId(sessionId);
+                    c.setId(userId);
+
                     return cartRepo.save(c);
                 });
     }
 
     @Override
-    public void addToCart(String sessionId, Long productId, int quantity) {
-
-        Cart cart = getCartForSession(sessionId);
-
+    public void addToCart(Long userId, Long productId, int quantity) {
+        Cart cart = getCartForUser(userId);
         Product product = productRepo.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Produkt nicht gefunden"));
-
-        ProductPrice price = priceRepo.findByProduct(product)
-                .orElseThrow(() -> new RuntimeException("Preis nicht gefunden"));
 
         Optional<CartItem> existing = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(productId))
@@ -61,8 +54,6 @@ public class CartServiceImpl implements CartService {
             CartItem item = new CartItem();
             item.setProduct(product);
             item.setQuantity(quantity);
-            item.setPriceNet(price.getPriceNet().doubleValue()); // Netto
-            item.setVatRate(price.getVatRate().doubleValue());   // z.B. 0.19
             item.setCart(cart);
             cart.getItems().add(item);
         }
@@ -71,20 +62,22 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void removeFromCart(String sessionId, Long productId) {
-        Cart cart = getCartForSession(sessionId);
+    public void removeFromCart(Long userId, Long productId) {
+        Cart cart = getCartForUser(userId);
         cart.getItems().removeIf(i -> i.getProduct().getId().equals(productId));
         cartRepo.save(cart);
     }
 
     @Override
-    public int getItemCount(String sessionId) {
-        return getCartForSession(sessionId).getTotalQuantity();
+    public int getItemCount(Long userId) {
+        return getCartForUser(userId).getItems().stream()
+                .mapToInt(CartItem::getQuantity)
+                .sum();
     }
 
     @Override
-    public void clearCart(String sessionId) {
-        Cart cart = getCartForSession(sessionId);
+    public void clearCart(Long userId) {
+        Cart cart = getCartForUser(userId);
         cart.getItems().clear();
         cartRepo.save(cart);
     }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/admin/own-categories")
+@RequestMapping("/admin/own_category")
 public class OwnCategoryAdminController {
 
     private final OwnCategoryService service;
@@ -49,6 +49,6 @@ public class OwnCategoryAdminController {
     @PostMapping
     public String create(OwnCategory category) {
         service.create(category);
-        return "redirect:/admin/own-categories";
+        return "redirect:/admin/own_category";
     }
 }

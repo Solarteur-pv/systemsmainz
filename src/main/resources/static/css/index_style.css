@@ -82,7 +82,7 @@ body {
 }
 
 input:checked + .slider {
-    background: #0a7a4b;
+    background: #4b78c0;
 }
 
 input:checked + .slider:before {
@@ -123,8 +123,8 @@ input:checked + .slider:before {
     transition: opacity 1s ease, transform 1s ease;
     text-align: center;
     width: 100%;
-    color: white;
-    text-shadow: 0 0 12px black;
+    color: #4b78c0;
+    text-shadow: 0 0 12px #e58b0c;;
 }
 
 .gr-slide.active .gr-caption {
@@ -143,8 +143,8 @@ input:checked + .slider:before {
     top: 50%;
     transform: translateY(-50%);
     font-size: 3rem; /* vorher 2.5rem */
-    color: white;
-    text-shadow: 0 0 12px black;
+    color: #4b78c0;
+    text-shadow: 0 0 12px #e58b0c;;
     cursor: pointer;
     user-select: none;
     padding: 12px; /* vorher 10px */

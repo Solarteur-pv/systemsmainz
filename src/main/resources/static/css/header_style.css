@@ -57,7 +57,7 @@ body {
 }
 
 .gr-menu li a:hover {
-    color: #0a7a4b;
+    color: #4b78c0;
 }
 
 /* Dropdown */
@@ -92,7 +92,7 @@ body {
 /* Cart Icon oben rechts */
 .gr-cart {
     position: absolute;
-    top: 22px;          /* Höhe fein einstellbar */
+    top: 15px;          /* Höhe fein einstellbar */
     right: 40px;        /* Abstand vom Rand */
     z-index: 3000;
 }
@@ -105,16 +105,16 @@ body {
 
 /* SVG Icon */
 .cart-svg {
-    width: 26px;
-    height: 26px;
-    stroke: #0a7a4b;     /* Logo-Grün */
+    width: 30px;
+    height: 30px;
+    stroke: #4b78c0;     /* Logo-Grün */
     fill: none;
     stroke-width: 2;
 }
 
 /* Badge */
 .cart-count {
-    background: #0a7a4b;
+    background: #4b78c0;
     color: white;
     font-size: 0.75rem;
     padding: 2px 6px;

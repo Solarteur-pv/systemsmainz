@@ -20,7 +20,7 @@
         <section class="create-user">
             <h2>Bild hinzufügen</h2>
 
-            <form th:action="@{/admin/own-product-images}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/admin/own_product_images}" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="productId" th:value="${product.id}">
 

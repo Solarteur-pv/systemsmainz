@@ -21,7 +21,7 @@ import java.security.Principal;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/admin/own-product-images")
+@RequestMapping("/admin/own_product_images")
 public class OwnProductImageAdminController {
 
     private final OwnProductService productService;
@@ -77,6 +77,6 @@ public class OwnProductImageAdminController {
 
         imageService.save(img);
 
-        return "redirect:/admin/own-product-images?productId=" + productId;
+        return "redirect:/admin/own_product_images?productId=" + productId;
     }
 }

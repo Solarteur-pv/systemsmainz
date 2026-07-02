@@ -7,7 +7,7 @@
 
 :root {
     --bg: #f5f5f5;
-    --text: #222;
+    --text:  #222;
     --card-bg: #ffffff;
     --card-shadow: 0 3px 10px rgba(0,0,0,0.10); /* stärker */
     --input-bg: #fff;
@@ -20,13 +20,13 @@
    DARK MODE (body.dark)
 ========================================= */
 body.dark {
-    --bg: #121212;
-    --text: #e5e5e5;
-    --card-bg: #1e1e1e;
+    --bg: white;
+    --text: #121212;
+    --card-bg: #e5e5e5;
     --card-shadow: 0 3px 10px rgba(0,0,0,0.45);
-    --input-bg: #1a1a1a;
+    --input-bg: white;
     --input-border: #444;
-    --button-bg: #4BC0C0;
+    --button-bg: #4b78c0;
     --button-text: #000;
 }
 
